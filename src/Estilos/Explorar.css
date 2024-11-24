@@ -1,0 +1,119 @@
+.explorar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tabs span {
+    font-size: 1rem;
+    margin-right: 1rem;
+    color: #333;
+}
+
+.tab-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab:hover {
+    background-color: #ffe5b4;
+}
+
+.tab.active {
+    background-color: #f9a602; 
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #fbc252;
+    border-radius: 25px;
+    padding: 0.5rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.icon-search {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.input-field {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    background-color: #fbc252;
+    color: #333;
+}
+
+.input-field::placeholder {
+    color: #666;
+}
+
+.search-button {
+    background-color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #ffe5b4;
+}
+
+@media (max-width: 768px) {
+    .tab-options {
+        gap: 0.5rem;
+    }
+
+    .input-field {
+        font-size: 0.9rem;
+    }
+
+    .search-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}

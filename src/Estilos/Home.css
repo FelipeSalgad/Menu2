@@ -1,0 +1,124 @@
+.home-section {
+    display: flex;
+    height: 100vh;
+}
+
+.section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-left {
+    background-image: url('../json/img/comidaRecortada.jpg'); 
+    background-size: cover;
+    background-position: center;
+}
+
+.home-right {
+    background-image: url('../json/img/pendejosRecortados.jpg'); 
+    background-size: cover;
+    background-position: center;
+}
+
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 2rem;
+}
+
+.content .logo_home {
+    width: 130px;
+    height: 35px;
+}
+
+.content .logo_home_r {
+    width: 110px;
+    height: 30px;
+}
+
+.content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+    width: 200px; 
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000; 
+    border: 2px solid #000; 
+}
+
+.comida {
+    background-color: rgb(255, 183, 77); 
+}
+
+.comida:hover {
+    background-color: #000;
+    color: #fff; 
+    border: 2px solid #fff;
+}
+
+.unirse {
+    background-color: rgb(255, 183, 77); 
+}
+
+.unirse:hover {
+    background-color: #000;
+    color: #fff; 
+    border: 2px solid #fff;
+}
+
+@media (max-width: 768px) {
+    .home-section {
+        flex-direction: column;
+    }
+
+    .content h2 {
+        font-size: 1.8rem; 
+    }
+
+    .content p {
+        font-size: 1.2rem; 
+    }
+
+    .btn {
+        font-size: 1rem; 
+        width: 150px; 
+    }
+
+    .content .logo_home,
+    .content .logo_home_r {
+        width: 90px; 
+        height: auto;
+    }
+}
