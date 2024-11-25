@@ -270,7 +270,7 @@ export default function Explorar() {
         },
     ];
     
-    //aca esto deberia ser aleatoriamente, para que no muestre los restaurantes y luego las comidas
+    //esto deberia ser aleatoriamente, para que no muestre los restaurantes y luego las comidas
     //pero aja no le supe
     const todo = [...restaurantes, ...comidas];
 

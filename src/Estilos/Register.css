@@ -1,87 +1,203 @@
-.register_container {
+.register-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    height: 90vh;
+    font-family: "Arial", sans-serif;
+}
+
+.register-left {
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 80vh;
+    align-items: center; 
+    padding: 2rem;
+    background-image: url('../json/img/fondoSinDerechos.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+}
+
+.logo-centro,
+.register-form,
+.register-welcome,
+.register-description {
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo-centro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.register-logo {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+.register-welcome {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: rgb(255, 183, 77);
+}
+
+.register-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.register-form {
+    width: 100%;
+}
+
+.register-field {
+    margin-bottom: 1.5rem;
+}
+
+.register-field label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #fcfcfc;
+}
+
+.register-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #727171;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #797979;
     background-color: #fff;
 }
 
-.container_register {
-    max-width: 400px;
-    width: 100%;
-    text-align: left;
-    background-color: #ffffff;
-}
-
-.register_title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-
-.form_cont_register {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.input_group_r {
-    text-align: left;
-}
-
-.input_group_r label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+.register-input:hover,
+.register-input:focus {
+    border: 3px solid rgb(255, 183, 77);
     outline: none;
 }
 
-.input:focus {
-    border-color: #f77f00;
-    box-shadow: 0 0 4px rgba(247, 127, 0, 0.5);
+.register-input::placeholder {
+    color: #aaa;
 }
 
-.btn_register {
-    width: 100%;
-    padding: 12px;
-    background-color: #f77f00;
-    color: white;
+.register-button {
+    padding: 0.75rem;
+    background-color: rgb(255, 183, 77);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 15px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-.btn_register:hover {
-    background-color: #e06a00;
-}
-
-.link_container_register {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-}
-
-.link_register {
-    color: #f77f00;
     text-decoration: none;
-    font-weight: bold;
-    margin-left: 5px;
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
 }
 
-.link_register:hover {
-    text-decoration: underline;
+.register-button:hover {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.register-right {
+    flex-basis: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.register-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 1200px) {
+    .register-left {
+        flex-basis: 60%;
+    }
+
+    .register-right {
+        flex-basis: 40%;
+        height: auto;
+    }
+}
+
+@media (max-width: 800px) {
+    .register-container {
+        flex-direction: column;
+    }
+
+    .register-left {
+        flex-basis: 100%;
+        height: auto;
+    }
+
+    .register-right {
+        display: none;
+    }
+
+    .register-image {
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 550px) {
+    .register-container {
+        flex-direction: column;
+    }
+
+    .register-left {
+        flex-basis: 100%;
+        align-items: center;
+        padding: 1.5rem;
+    }
+
+    .register-form {
+        max-width: 100%;
+    }
+
+    .register-logo {
+        width: 100px;
+    }
+
+    .register-welcome {
+        font-size: 1.5rem;
+    }
+
+    .register-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .register-left {
+        padding: 1rem;
+    }
+
+    .register-welcome {
+        font-size: 1.2rem;
+    }
+
+    .register-description {
+        font-size: 0.8rem;
+    }
+
+    .register-button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
 }
