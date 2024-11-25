@@ -1,0 +1,210 @@
+.modal-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.menu-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80%; 
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.cerrar-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.menu-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.tab:hover {
+    color: #ff9500;
+}
+
+.tab-activo {
+    color: #ff9500;
+    border-bottom: 2px solid #ff9500;
+}
+
+.menu-tabs button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tab-activo {
+    color: #ff9500;
+    border-bottom: 2px solid #ff9500;
+}
+
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+    text-align: center;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 100%; 
+}
+
+.menu-item-imagen {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.menu-item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.menu-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+    flex-grow: 1; 
+}
+
+.menu-item-precio {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.btn-agregar {
+    background-color: #ff9500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-agregar:hover {
+    background-color: #000000;
+    color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+    .menu-contenido {
+        padding: 15px;
+        width: 95%;
+    }
+
+    .menu-items {
+        grid-template-columns: 1fr; 
+    }
+
+    .menu-item {
+        padding: 15px;
+    }
+
+    .menu-item-imagen {
+        height: 120px;
+    }
+
+    .menu-item h3 {
+        font-size: 16px;
+    }
+
+    .menu-item p {
+        font-size: 12px;
+    }
+
+    .btn-agregar {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    .menu-items {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    }
+
+    .menu-item {
+        padding: 18px;
+    }
+
+    .menu-item-imagen {
+        height: 140px;
+    }
+
+    .menu-item h3 {
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .menu-contenido {
+        max-width: 1000px;
+    }
+
+    .menu-item {
+        padding: 25px;
+    }
+
+    .menu-item h3 {
+        font-size: 20px;
+    }
+
+    .menu-item p {
+        font-size: 15px;
+    }
+
+    .btn-agregar {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}

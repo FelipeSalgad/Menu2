@@ -7,6 +7,7 @@ import Register from "./Pages/Register";
 import Footer from "./components/Footer";
 import Explorar from "./Restaurante/Explorar";
 import NavBar from "./components/NavBar";
+import Restaurante from "./Restaurante/Restaurante";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
       <Route path="/explorar"
         element={<Explorar />}>
       </Route>
+      <Route path="/restaurante"
+        element={<Restaurante />}>
+      </Route> 
     </Routes>
     <Footer />
     </>

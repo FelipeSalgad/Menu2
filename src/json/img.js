@@ -10,6 +10,10 @@ import fondoCliente from './img/fondoCliente.jpg'
 import fondoSinDerechos from './img/fondoSinDerechos.jpg'
 import doPlato from './img/doPlato.jpg'
 import pocoEplato from './img/pocoEplato.jpg'
+import mapa from './img/mapa.png'
+import carrito from './img/carrito.png'
+import gatoTonto from './img/gatoTonto.png'
+import menu from './img/menu.png'
 
 
 export default {
@@ -24,5 +28,9 @@ export default {
     "fondoCliente": fondoCliente,
     "fondoSinDerechos": fondoSinDerechos,
     "doPlato": doPlato,
-    "pocoEplato": pocoEplato
+    "pocoEplato": pocoEplato,
+    "mapa": mapa,
+    "carrito": carrito,
+    "gatoTonto": gatoTonto,
+    "menu": menu
 }
