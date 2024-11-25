@@ -1,5 +1,6 @@
 import "../Estilos/Register.css";
 import { Form, Formik, Field } from "formik";
+import { Link } from "react-router-dom";
 import img from "../json/img";
 
 export default function Register() {
@@ -58,7 +59,7 @@ export default function Register() {
                                 placeholder="Confirmar Contraseña"
                             />
                         </div>
-                        <button className="register-button" type="submit">Unirse al banquete</button>
+                        <Link to="/login" className="register-button" type="submit" >Unirse al banquete</Link>
                     </Form>
                 </Formik>
             </div>
