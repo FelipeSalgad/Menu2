@@ -104,7 +104,7 @@ export default function Menu({ isVisible, toggleCart }) {
                             <span className="menu-item-precio">
                                 ${item.precio.toLocaleString()}
                             </span>
-                            <button className="btn-agregar">Añadir al carrito</button>
+                            <button className="btn-agregar">Añadir al carritoo</button>
                         </div>
                     ))}
                 </div>
