@@ -1,6 +1,6 @@
 import "../Estilos/Login.css";
 import { Form, Formik, Field } from "formik";
-import img from "../json/img";
+import img from "../json/img.js";
 import { Link } from "react-router-dom";
 
 export default function Login() {

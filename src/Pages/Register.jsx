@@ -1,7 +1,7 @@
 import "../Estilos/Register.css";
 import { Form, Formik, Field } from "formik";
 import { Link } from "react-router-dom";
-import img from "../json/img";
+import img from "../json/img.js";
 
 export default function Register() {
     const initialValues = {
