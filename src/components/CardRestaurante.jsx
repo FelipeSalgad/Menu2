@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import "../Estilos/CardRestaurante.css";
 
 export default function CardRestaurante({ data }) {
@@ -7,24 +6,25 @@ export default function CardRestaurante({ data }) {
         <div className="restaurant-grid">
             {data.map((item) => (
                 <div key={item.id} className="restaurant-card">
-                    <div className="restaurant-image">
-                        <img src={item.logo} alt={item.title} />
-                        <span className="restaurant-tag">{item.tag}</span>
+                    <div className="restaurant-image-container">
+                        <img className="restaurant-image" src={item.logo} alt={item.title} />
+                        {/* el icono de la etiqueta deberia cambiar dependiendo de si es restaurante o plato, pero no se como hacer eso */}
+                        {item.tag && <span className="restaurant-tag"> <i className="fa-solid fa-utensils"></i> {item.tag}</span>}
                     </div>
-                    <div className="restaurant-content">
-                        <h1 className="restaurant-title">{item.title}</h1>
+                    <div className="restaurant-info">
+                        <h2 className="restaurant-title">{item.title}</h2>
                         {item.description && (
                             <p className="restaurant-description">{item.description}</p>
                         )}
+                        {item.ubicacion && (
+                            <p className="restaurant-ubicacion"><i className="fa-solid fa-magnifying-glass"></i>  {item.ubicacion}</p>
+                        )}
+                        {item.rating && (
+                            <p className="restaurant-rating">
+                                <i className="fa-solid fa-star"></i> {item.rating}
+                            </p>
+                        )}
                         <p className="restaurant-price">{item.price}</p>
-                        <div className="restaurant-buttons">
-                            <Link className="button-primary" to="/menu">
-                                Ver Menú
-                            </Link>
-                            <Link className="button-secondary" to="/reserva">
-                                Reservar Mesa
-                            </Link>
-                        </div>
                     </div>
                 </div>
             ))}
@@ -32,19 +32,18 @@ export default function CardRestaurante({ data }) {
     );
 }
 
-
-//tenia un error en el data y mi mejor amigo dio esta solucion, igual esto es nomas para probar como se ve
-//no se si el back quede asi...
 // Validación de las props con PropTypes
 CardRestaurante.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             logo: PropTypes.string.isRequired,
-            tag: PropTypes.string.isRequired,
+            tag: PropTypes.string, 
             title: PropTypes.string.isRequired,
-            description: PropTypes.string,
+            description: PropTypes.string, 
+            ubicacion: PropTypes.string, 
+            rating: PropTypes.string, 
             price: PropTypes.string.isRequired,
         })
-    ).isRequired, // La prop `data` es obligatoria y debe ser un array de objetos
+    ).isRequired,
 };

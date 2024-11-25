@@ -7,6 +7,9 @@ import Aida from './img/Aida.jpg'
 import LaPutadetuTia from './img/LaPutadetuTia.jpg'
 import macaco from './img/macaco.jpg'
 import fondoCliente from './img/fondoCliente.jpg'
+import fondoSinDerechos from './img/fondoSinDerechos.jpg'
+import doPlato from './img/doPlato.jpg'
+import pocoEplato from './img/pocoEplato.jpg'
 
 
 export default {
@@ -18,5 +21,8 @@ export default {
     "Aida": Aida,
     "LaPutadetuTia": LaPutadetuTia,
     "macaco": macaco, 
-    "fondoCliente": fondoCliente
+    "fondoCliente": fondoCliente,
+    "fondoSinDerechos": fondoSinDerechos,
+    "doPlato": doPlato,
+    "pocoEplato": pocoEplato
 }

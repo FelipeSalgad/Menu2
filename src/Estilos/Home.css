@@ -52,12 +52,12 @@
     height: 30px;
 }
 
-.content h2 {
+.content .content-h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.content p {
+.content .content-p {
     font-size: 1.8rem;
     margin-bottom: 2rem;
 }
