@@ -1,15 +1,49 @@
 import "../Estilos/Register.css";
 import { Form, Formik, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // useNavigate para redirigir
 import img from "../json/img.js";
+import axios from "axios"; 
 
 export default function Register() {
     const initialValues = {
         nombre: "",
+        apellido: "",
         correo: "",
+        telefono: "",
         contrasena: "",
         confirmarContrasena: "",
     };
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (values) => {
+        // Validaciones de campos vacíos
+        if (!values.nombre || !values.apellido || !values.correo || !values.telefono || !values.contrasena || !values.confirmarContrasena) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+    
+        // Validación de coincidencia de contraseñas
+        if (values.contrasena !== values.confirmarContrasena) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+    
+        try {
+            // Realizar la petición POST a /createCliente
+            const response = await axios.post("http://localhost:3000/api/createCliente", values);
+    
+            // Si la respuesta es 200, el registro fue exitoso
+            if (response.status === 200) {
+                alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+                navigate("/login"); // Redirigir al login después del registro
+            }
+        } catch (error) {
+            console.error("Error al registrar el usuario:", error);
+            alert("Hubo un error en el registro. Intenta de nuevo.");
+        }
+    };
+    
 
     return (
         <div className="register-container">
@@ -21,15 +55,24 @@ export default function Register() {
                 <p className="register-description">
                     Regístrate y explora miles de experiencias culinarias únicas.
                 </p>
-                <Formik initialValues={initialValues}>
+                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                     <Form className="register-form">
                         <div className="register-field">
-                            <label htmlFor="nombre">Usuario</label>
+                            <label htmlFor="nombre">Nombre(s)</label>
                             <Field
                                 className="register-input"
                                 type="text"
                                 name="nombre"
-                                placeholder="Usuario"
+                                placeholder="Nombre(s)"
+                            />
+                        </div>
+                        <div className="register-field">
+                            <label htmlFor="apellido">Apellidos</label>
+                            <Field
+                                className="register-input"
+                                type="text"
+                                name="apellido"
+                                placeholder="apellidos"
                             />
                         </div>
                         <div className="register-field">
@@ -39,6 +82,15 @@ export default function Register() {
                                 type="email"
                                 name="correo"
                                 placeholder="Correo Electrónico"
+                            />
+                        </div>
+                        <div className="register-field">
+                            <label htmlFor="telefono">Teléfono</label>
+                            <Field
+                                className="register-input"
+                                type="text"
+                                name="telefono"
+                                placeholder="telefono"
                             />
                         </div>
                         <div className="register-field">
@@ -59,7 +111,7 @@ export default function Register() {
                                 placeholder="Confirmar Contraseña"
                             />
                         </div>
-                        <Link to="/login" className="register-button" type="submit" >Unirse al banquete</Link>
+                        <button type="submit" className="register-button">Unirse al banquete</button>
                     </Form>
                 </Formik>
             </div>
