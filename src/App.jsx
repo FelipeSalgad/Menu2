@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import './App.css'
-import NotFound from "./Pages/NotFound"
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import Footer from "./components/Footer";
-import Explorar from "./Restaurante/Explorar";
-import NavBar from "./components/NavBar";
-import Restaurante from "./Restaurante/Restaurante";
+import NotFound from "./InterfazCliente/Pages/NotFound";
+import Home from "./InterfazCliente/Pages/Home";
+import Login from "./InterfazCliente/Pages/Login";
+import Register from "./InterfazCliente/Pages/Register";
+import Footer from "./InterfazCliente/components/Footer";
+import Explorar from "./InterfazCliente/Restaurante/Explorar";
+import NavBar from "./InterfazCliente/components/NavBar";
+import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
+import Perfil from "./InterfazCliente/Restaurante/Perfil";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
       <Route path="/restaurante"
         element={<Restaurante />}>
       </Route> 
+      <Route path="/perfil"
+        element={<Perfil />}>
+      </Route>
     </Routes>
     <Footer />
     </>

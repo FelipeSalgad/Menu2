@@ -23,7 +23,7 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .navegation {
@@ -34,7 +34,7 @@
 .navegation a {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
   text-decoration: none;
   color: #000;
   font-size: 14px;
@@ -47,7 +47,7 @@
 }
 
 .button_login {
-  background-color: rgb(255, 183, 77); 
+  background-color: rgb(255, 183, 77);
   color: #000;
   border: 2px solid #000;
   padding: 8px 12px;
@@ -61,16 +61,32 @@
 
 .button_login:hover {
   background-color: #000;
-  color: #fff; 
+  color: #fff;
   border: 2px solid #fff;
+}
+
+.profile-icon {
+  font-size: 20px;
+  color: #000;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-icon:hover {
+  color: #fff;
 }
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px;
+  }
+
+  .logo {
+    width: 80px;
   }
 
   .navegation {
@@ -78,7 +94,47 @@
     gap: 10px;
   }
 
-  .button {
-    margin-top: 10px;
+  .right-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .button_login {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .profile-icon {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .navegation a {
+    font-size: 14px;
+  }
+
+  .profile-icon {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    padding: 20px 40px;
+  }
+
+  .navegation a {
+    font-size: 16px;
+  }
+
+  .button_login {
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+
+  .profile-icon {
+    font-size: 26px;
   }
 }
