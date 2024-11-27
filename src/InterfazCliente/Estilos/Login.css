@@ -56,9 +56,9 @@
 .login-form {
     width: 100%;
 }
-
+    
 .login-field {
-    margin-bottom: 1.5rem;
+    margin-bottom:2rem;
 }
 
 .login-field label {
@@ -71,7 +71,7 @@
 
 .login-input {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.65rem;
     border: 1px solid #727171;
     border-radius: 15px;
     font-size: 0.9rem;
@@ -81,7 +81,7 @@
 
 .login-input:hover,
 .login-input:focus {
-    border: 3px solid rgb(255, 183, 77);
+    border: 1px solid rgb(255, 183, 77);
     outline: none;
 }
 
