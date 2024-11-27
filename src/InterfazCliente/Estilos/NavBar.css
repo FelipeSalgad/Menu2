@@ -7,6 +7,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.carrito-icon {
+  background-color: transparent; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+
+}
+
+.carrito-icon:hover {
+  color: #fff; 
+}
+
 .logo {
   display: flex;
   align-items: center;

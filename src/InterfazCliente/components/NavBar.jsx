@@ -2,6 +2,7 @@ import "../Estilos/NavBar.css";
 import { Link } from "react-router-dom";
 import img from "../json/img";
 import { useState } from "react";
+import Carrito from "./Carrito";
 
 export default function NavBar() {
     //esto es para ver como se ve el nav estan logueado o no.
@@ -21,9 +22,7 @@ export default function NavBar() {
                     <Link to="/favoritos">
                         <i className="fa-regular fa-heart"></i> Favoritos
                     </Link>
-                    <Link to="/cart">
-                        <i className="fa-solid fa-cart-shopping"></i> Carrito
-                    </Link>
+                    < Carrito className="carrito-icon"/>
                 </div>
                 <div className="button">
                     {!isLoggedIn ? (

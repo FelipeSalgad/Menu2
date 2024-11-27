@@ -1,0 +1,183 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.carrito-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80vw; 
+    max-width: 600px; 
+    height: 100%;
+    background: #fff;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-right: 20px;
+}
+
+.carrito-sidebar.open {
+    right: 0;
+}
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.carrito-header h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.carrito-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.restaurante {
+    margin-bottom: 20px;
+}
+
+.restaurante h3 {
+    font-size: 16px;
+    color: #ff7a00;
+    margin-bottom: 10px;
+}
+
+.producto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.producto img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.cantidad {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+}
+
+.cantidad button {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.cantidad span {
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.carrito-footer {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.carrito-footer p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.botones {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.seguir-comprando, .confirmar {
+    background: white;
+    color: #000000;
+    border: 2px solid #ffb74d; 
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px; 
+    border-radius: 30px; 
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+}
+
+.seguir-comprando:hover, .confirmar:hover {
+    background: #ffb74d;
+    color: white;
+    transition: 0.3s;
+}
+
+
+@media (max-width: 768px) {
+    .carrito-sidebar {
+        width: 90vw;
+        padding: 10px; 
+    }
+
+    .carrito-header h2 {
+        font-size: 16px;
+    }
+
+    .restaurante h3 {
+        font-size: 14px;
+    }
+
+    .producto img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .cantidad button {
+        width: 20px;
+        height: 20px;
+    }
+
+    .cantidad span {
+        margin: 0 5px;
+    }
+
+    .carrito-footer p {
+        font-size: 14px;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .seguir-comprando, .confirmar {
+        width: 100%; 
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+}
+
