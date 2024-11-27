@@ -9,6 +9,7 @@ import Explorar from "./InterfazCliente/Restaurante/Explorar";
 import NavBar from "./InterfazCliente/components/NavBar";
 import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
+import Favoritos from "./InterfazCliente/components/Favoritos";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
       </Route> 
       <Route path="/perfil"
         element={<Perfil />}>
+      </Route>
+      <Route path="/favoritos"
+        element={<Favoritos />}>
       </Route>
     </Routes>
     <Footer />

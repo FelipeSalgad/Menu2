@@ -1,7 +1,6 @@
 import { useState } from "react";
 import InfoPerfil from "../components/InfoPerfil"; 
 import UltimasOrdenes from "../components/UltimasOrdenes";
-import Favoritos from "../components/Favoritos";
 import Resenas from "../components/Resenas";
 import "../Estilos/Perfil.css";
 
@@ -24,8 +23,6 @@ export default function Perfil() {
                 return <InfoPerfil />;
             case "ultimasOrdenes":
                 return <UltimasOrdenes />;
-            case "favoritos":
-                return <Favoritos />;
             case "resenas":
                 return <Resenas />;
             default:
@@ -60,12 +57,6 @@ export default function Perfil() {
                         className={selectedSection === "ultimasOrdenes" ? "active" : ""}
                     >
                         <i className="fa-solid fa-clipboard-list"></i> Últimas órdenes
-                    </li>
-                    <li 
-                        onClick={() => setSelectedSection("favoritos")} 
-                        className={selectedSection === "favoritos" ? "active" : ""}
-                    >
-                        <i className="fa-solid fa-heart"></i> Favoritos
                     </li>
                     <li 
                         onClick={() => setSelectedSection("resenas")} 

@@ -18,7 +18,7 @@ export default function NavBar() {
             </div>
             <div className="right-section">
                 <div className="navegation">
-                    <Link to="/favorites">
+                    <Link to="/favoritos">
                         <i className="fa-regular fa-heart"></i> Favoritos
                     </Link>
                     <Link to="/cart">
