@@ -1,11 +1,11 @@
-.register-container {
+.login-container {
     display: flex;
     flex-direction: row;
     height: 90vh;
     font-family: "Arial", sans-serif;
 }
 
-.register-left {
+.login-left {
     flex-basis: 40%;
     display: flex;
     flex-direction: column;
@@ -20,9 +20,9 @@
 }
 
 .logo-centro,
-.register-form,
-.register-welcome,
-.register-description {
+.login-form,
+.login-welcome,
+.login-description {
     width: 100%;
     max-width: 400px;
 }
@@ -34,34 +34,34 @@
     margin-bottom: 2rem;
 }
 
-.register-logo {
+.login-logo {
     width: 160px;
     height: auto;
     object-fit: contain;
 }
 
-.register-welcome {
+.login-welcome {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: rgb(255, 183, 77);
 }
 
-.register-description {
+.login-description {
     font-size: 1rem;
     margin-bottom: 2rem;
     color: #ffffff;
 }
 
-.register-form {
+.login-form {
     width: 100%;
 }
-
-.register-field {
-    margin-bottom: 1.5rem;
+    
+.login-field {
+    margin-bottom:2rem;
 }
 
-.register-field label {
+.login-field label {
     display: block;
     text-align: left;
     margin-bottom: 0.5rem;
@@ -69,9 +69,9 @@
     color: #fcfcfc;
 }
 
-.register-input {
+.login-input {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.65rem;
     border: 1px solid #727171;
     border-radius: 15px;
     font-size: 0.9rem;
@@ -79,17 +79,17 @@
     background-color: #fff;
 }
 
-.register-input:hover,
-.register-input:focus {
-    border: 3px solid rgb(255, 183, 77);
+.login-input:hover,
+.login-input:focus {
+    border: 1px solid rgb(255, 183, 77);
     outline: none;
 }
 
-.register-input::placeholder {
+.login-input::placeholder {
     color: #aaa;
 }
 
-.register-button {
+.login-button {
     padding: 0.75rem;
     background-color: rgb(255, 183, 77);
     color: #fff;
@@ -104,13 +104,33 @@
     max-width: 200px;
 }
 
-.register-button:hover {
+.login-button:hover {
     background-color: #000;
     color: #fff;
     border: 1px solid #fff;
 }
 
-.register-right {
+.login-links {
+    display: flex;             
+    justify-content: space-between;  
+    width: 100%;                
+    max-width: 400px;           
+    margin-top: 1rem;
+    margin-bottom: 15px;
+}
+
+.login-link {
+    color: #ffaa00;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;      
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.login-right {
     flex-basis: 60%;
     display: flex;
     justify-content: center;
@@ -118,86 +138,95 @@
     overflow: hidden;
 }
 
-.register-image {
+.login-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 @media (max-width: 1200px) {
-    .register-left {
+    .login-left {
         flex-basis: 60%;
     }
 
-    .register-right {
+    .login-right {
         flex-basis: 40%;
         height: auto;
     }
 }
 
 @media (max-width: 800px) {
-    .register-container {
+    .login-container {
         flex-direction: column;
     }
 
-    .register-left {
+    .login-left {
         flex-basis: 100%;
         height: auto;
     }
 
-    .register-right {
+    .login-right {
         display: none;
     }
 
-    .register-image {
+    .login-image {
         height: 200px;
         object-fit: cover;
     }
 }
 
 @media (max-width: 550px) {
-    .register-container {
+    .login-container {
         flex-direction: column;
     }
 
-    .register-left {
+    .login-left {
         flex-basis: 100%;
         align-items: center;
         padding: 1.5rem;
     }
 
-    .register-form {
+    .login-form {
         max-width: 100%;
     }
 
-    .register-logo {
+    .login-logo {
         width: 100px;
     }
 
-    .register-welcome {
+    .login-welcome {
         font-size: 1.5rem;
     }
 
-    .register-description {
+    .login-description {
         font-size: 0.9rem;
     }
 }
 
 @media (max-width: 400px) {
-    .register-left {
+    .login-left {
         padding: 1rem;
     }
 
-    .register-welcome {
+    .login-welcome {
         font-size: 1.2rem;
     }
 
-    .register-description {
+    .login-description {
         font-size: 0.8rem;
     }
 
-    .register-button {
+    .login-button {
         font-size: 0.9rem;
         padding: 0.5rem;
+    }
+
+    .login-links {
+        flex-direction: column;
+    }
+
+    .login-link {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
     }
 }

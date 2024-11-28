@@ -12,7 +12,7 @@ export default function Home() {
                         Explora con <img src= {img.logoBlanco} className="logo_home"/>
                     </h2>
                     <p className='content-p'>Los mejores restaurantes y platillos cerca de ti.</p>
-                    <Link className="btn comida" to='/explorar'>¡Elige y disfruta!</Link>
+                    <Link className="btnn comida" to='/explorar'>¡Elige y disfruta!</Link>
                 </div>
             </div>
             <div className="section home-right">
@@ -21,7 +21,7 @@ export default function Home() {
                     <p className='content-p'>
                         ¡Únete a <img src= {img.logoBlanco} className="logo_home_r" /> y muestra tus platillos!
                     </p>
-                    <Link className="btn unirse" to='/#'>Unirme</Link>
+                    <Link className="btnn unirse" to='/#'>Unirme</Link>
                 </div>
             </div>
         </div>

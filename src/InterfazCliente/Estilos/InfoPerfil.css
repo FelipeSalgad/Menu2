@@ -1,0 +1,115 @@
+.perfil-content {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.perfil-content h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.perfil-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.form-group {
+    flex: 1 1 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-field {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.form-field:focus {
+    border: 1px solid rgb(255, 183, 77);
+    outline: none;
+}
+
+.form-field:hover {
+    border: 1px solid rgb(255, 183, 77);
+}
+
+.gen-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.gen-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 150px;
+    background-color: rgb(255, 183, 77);
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: rgba(225, 151, 40, 0.896);
+}
+
+@media (max-width: 767px) {
+    .perfil-content {
+        padding: 15px;
+    }
+
+    .perfil-content h2 {
+        font-size: 18px;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .btn {
+        min-width: 100%;
+    }
+}
+
+@media (min-width: 600px) {
+    .form-group {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
