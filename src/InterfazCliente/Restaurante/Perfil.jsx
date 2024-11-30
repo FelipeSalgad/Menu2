@@ -1,35 +1,56 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import InfoPerfil from "../components/InfoPerfil";
 import UltimasOrdenes from "../components/UltimasOrdenes";
 import Resenas from "../components/Resenas";
 import "../Estilos/Perfil.css";
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import axios from "axios";
+import { ClienteContext } from "../context/ClienteContext"; // Importar el contexto
 
 export default function Perfil() {
   const navigate = useNavigate(); // Inicializar useNavigate
-  const [userName, setUserName] = useState("");
+  const { cliente, setCliente } = useContext(ClienteContext); // Acceder al contexto
+  const [selectedSection, setSelectedSection] = useState(null);
+  const [avatar, setAvatar] = useState(cliente?.imagen_perfil || "https://via.placeholder.com/80");
+  const [userName, setUserName] = useState(cliente?.nombre || "");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const storedCliente = JSON.parse(localStorage.getItem("cliente"));
 
-    if (!token) {
-      navigate("/login"); // Redirige a la página de inicio de sesión
+    if (!token) { //Si el careverga no está logeado lo manda pal login
+      navigate("/login");
     }
-    if (storedCliente) {
-      setUserName(storedCliente.nombre);
+
+    if (cliente) {
+      setUserName(cliente.nombre);
+      setAvatar(cliente.imagen_perfil || "https://via.placeholder.com/80");
     }
-  }, []);
+  }, [cliente, navigate]);
 
-  
-  const [selectedSection, setSelectedSection] = useState(null);
-  const [avatar, setAvatar] = useState("https://via.placeholder.com/80");
-
-  const handleAvatarChange = (event) => {
+  const handleAvatarChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => setAvatar(e.target.result);
+
+      reader.onload = async (e) => {
+        const base64Image = e.target.result;
+        setAvatar(base64Image);
+        try {
+          const response = await axios.put(
+            `http://localhost:3000/api/updateCliente/${cliente.id}`,
+            { imagen_perfil: base64Image }
+          );
+
+          if (response.status === 200) {
+            setCliente({ ...cliente, imagen_perfil: base64Image });
+            alert("Imagen actualizada exitosamente");
+          }
+        } catch (error) {
+          console.error("Error al actualizar la imagen:", error);
+          alert("Ocurrió un error al actualizar la imagen.");
+        }
+      };
+
       reader.readAsDataURL(file);
     }
   };
