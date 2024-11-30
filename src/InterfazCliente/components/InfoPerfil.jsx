@@ -74,7 +74,7 @@ export default function InfoPerfil({setUserName}) {
     };
     try {
       //console.log(localStorage.getItem("cliente"));
-      const response = await axios.put(`http://localhost:3000/api/updateCliente/${updatedData.id_cliente}`, updatedData);
+      const response = await axios.put(`https://menuapi-4u6v.onrender.com/api/updateCliente/${updatedData.id_cliente}`, updatedData);
 
       if (response.status === 200) {
         setUserName(updatedData.nombre); // Actualizamos el nombre en la página principal

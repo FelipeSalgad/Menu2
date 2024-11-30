@@ -20,8 +20,8 @@ export default function Explorar() {
 
                 // Hacer la petición para actualizar los datos
                 const [restauranteRes, categoriasRes] = await Promise.all([
-                    fetch("http://localhost:3000/api/restaurante"),
-                    fetch("http://localhost:3000/api/categoria"),
+                    fetch("https://menuapi-4u6v.onrender.com/api/restaurante"),
+                    fetch("https://menuapi-4u6v.onrender.com/api/categoria"),
                 ]);
 
                 const restaurantesData = await restauranteRes.json();

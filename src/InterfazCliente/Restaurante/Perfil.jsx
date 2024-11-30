@@ -37,7 +37,7 @@ export default function Perfil() {
         setAvatar(base64Image);
         try {
           const response = await axios.put(
-            `http://localhost:3000/api/updateCliente/${cliente.id}`,
+            `https://menuapi-4u6v.onrender.com/api/updateCliente/${cliente.id}`,
             { imagen_perfil: base64Image }
           );
 

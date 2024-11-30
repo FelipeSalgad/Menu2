@@ -11,7 +11,7 @@ import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
 import { AuthProvider } from "./InterfazCliente/context/authContext";
-import { ClienteProvider } from "./InterfazCliente/context/clienteContext";
+import { ClienteProvider } from "./InterfazCliente/context/ClienteContext";
 
 function App() {
   return (

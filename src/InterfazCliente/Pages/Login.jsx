@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/authContext.jsx";
-import { ClienteContext } from "../context/clienteContext.jsx";
+import { ClienteContext } from "../context/ClienteContext.jsx";
 
 export default function Login() {
   const { login } = useAuth();
@@ -21,7 +21,7 @@ export default function Login() {
   const handleLogin = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/loginCliente",
+        "https://menuapi-4u6v.onrender.com/api/loginCliente",
         values
       );
       if (response.status === 200) {
