@@ -14,7 +14,7 @@ import mapa from './img/mapa.png'
 import carrito from './img/carrito.png'
 import gatoTonto from './img/gatoTonto.png'
 import menu from './img/menu.png'
-
+import defaultLogo from './img/defaultlogo.png'
 
 export default {
     "logo": logo,
@@ -32,5 +32,6 @@ export default {
     "mapa": mapa,
     "carrito": carrito,
     "gatoTonto": gatoTonto,
-    "menu": menu
+    "menu": menu,
+    "defaultLogo": defaultLogo
 }

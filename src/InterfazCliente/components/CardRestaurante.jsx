@@ -12,12 +12,12 @@ export default function CardRestaurante({ data }) {
             <div className="restaurant-image-container">
               <img
                 className="restaurant-image"
-                src={
+                src={ 
                   item.logo
                     ? item.logo
                         .replace(/^url\(['"]?/, "")
                         .replace(/['"]?\)$/, "")
-                    : img.Aida // Hay que poner una imagen por defecto si el restaurante no tiene logo
+                    : img.defaultLogo // Hay que poner una imagen por defecto si el restaurante no tiene logo
                 }
                 alt={item.nombre_restaurante}
               />

@@ -12,7 +12,13 @@ export default function Explorar() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Obtener restaurantes y categorías en paralelo
+                // Mostrar datos en caché si existen
+                const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
+                if (cachedData) {
+                    processAndSetData(cachedData.restaurantes, cachedData.categorias);
+                }
+
+                // Hacer la petición para actualizar los datos
                 const [restauranteRes, categoriasRes] = await Promise.all([
                     fetch("http://localhost:3000/api/restaurante"),
                     fetch("http://localhost:3000/api/categoria"),
@@ -21,22 +27,14 @@ export default function Explorar() {
                 const restaurantesData = await restauranteRes.json();
                 const categoriasData = await categoriasRes.json();
 
-                // Crear un mapa de id_categoria -> nombre_categoria
-                const categoriaMap = categoriasData.reduce((acc, categoria) => {
-                    acc[categoria.id_categoria] = categoria.nombre;
-                    return acc;
-                }, {});
+                // Guardar nuevos datos en caché
+                localStorage.setItem(
+                    "restaurantesCache",
+                    JSON.stringify({ restaurantes: restaurantesData, categorias: categoriasData })
+                );
 
-                setCategories(categoriaMap);
-
-                // Agregar el nombre de la categoría a cada restaurante
-                const restaurantesWithCategories = restaurantesData.map((restaurante) => ({
-                    ...restaurante,
-                    tag: categoriaMap[restaurante.id_categoria] || "Sin categoría",
-                }));
-
-                setRestaurantes(restaurantesWithCategories);
-                setTodo([...restaurantesWithCategories, ...comidas]);
+                // Actualizar los datos en el estado
+                processAndSetData(restaurantesData, categoriasData);
             } catch (error) {
                 console.error("Error al cargar los datos:", error);
             }
@@ -44,7 +42,25 @@ export default function Explorar() {
 
         fetchData();
     }, [comidas]); // Si "comidas" cambia, se recalcula "todo"
-    //Debería ser productos, luego hacer lo mismo que se hizo con restaurantes, pero como no hay datos, se deja en pendiente
+
+    const processAndSetData = (restaurantesData, categoriasData) => {
+        // Crear un mapa de id_categoria -> nombre_categoria
+        const categoriaMap = categoriasData.reduce((acc, categoria) => {
+            acc[categoria.id_categoria] = categoria.nombre;
+            return acc;
+        }, {});
+
+        setCategories(categoriaMap);
+
+        // Agregar el nombre de la categoría a cada restaurante
+        const restaurantesWithCategories = restaurantesData.map((restaurante) => ({
+            ...restaurante,
+            tag: categoriaMap[restaurante.id_categoria] || "Sin categoría",
+        }));
+
+        setRestaurantes(restaurantesWithCategories);
+        setTodo([...restaurantesWithCategories, ...comidas]);
+    };
 
     const getActiveData = () => {
         if (activeTab === "Restaurante") return restaurantes;
