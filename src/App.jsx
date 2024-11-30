@@ -11,21 +11,25 @@ import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
 import { AuthProvider } from "./InterfazCliente/context/authContext";
+import { ClienteProvider } from "./InterfazCliente/context/clienteContext";
+
 function App() {
   return (
     <AuthProvider>
-      <NavBar />
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/explorar" element={<Explorar />} />
-        <Route path="/restaurante" element={<Restaurante />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/favoritos" element={<Favoritos />} />
-      </Routes>
-      <Footer />
+      <ClienteProvider>
+        <NavBar />
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/explorar" element={<Explorar />} />
+          <Route path="/restaurante" element={<Restaurante />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/favoritos" element={<Favoritos />} />
+        </Routes>
+        <Footer />
+      </ClienteProvider>
     </AuthProvider>
   );
 }

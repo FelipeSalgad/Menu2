@@ -1,14 +1,16 @@
 import "../Estilos/Login.css";
 import { Form, Formik, Field } from "formik";
 import img from "../json/img.js";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/authContext.jsx";
+import { ClienteContext } from "../context/clienteContext.jsx";
 
 export default function Login() {
-  const { login } = useAuth();  
+  const { login } = useAuth();
+  const { setCliente }  = useContext(ClienteContext);
+
   const initialValues = {
     correo: "",
     contrasena: "",
@@ -22,10 +24,10 @@ export default function Login() {
         "http://localhost:3000/api/loginCliente",
         values
       );
-      console.log(response);
       if (response.status === 200) {
         login(response.data.token);
         navigate("/explorar"); // Redirige al usuario
+        setCliente(response.data.cliente);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

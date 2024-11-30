@@ -7,13 +7,21 @@ import { useNavigate } from "react-router-dom"; // Importar useNavigate
 
 export default function Perfil() {
   const navigate = useNavigate(); // Inicializar useNavigate
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const storedCliente = JSON.parse(localStorage.getItem("cliente"));
+
     if (!token) {
       navigate("/login"); // Redirige a la página de inicio de sesión
     }
+    if (storedCliente) {
+      setUserName(storedCliente.nombre);
+    }
   }, []);
+
+  
   const [selectedSection, setSelectedSection] = useState(null);
   const [avatar, setAvatar] = useState("https://via.placeholder.com/80");
 
@@ -29,7 +37,7 @@ export default function Perfil() {
   const renderSection = () => {
     switch (selectedSection) {
       case "infoPerfil":
-        return <InfoPerfil />;
+        return <InfoPerfil setUserName={setUserName} />;
       case "ultimasOrdenes":
         return <UltimasOrdenes />;
       case "resenas":
@@ -43,7 +51,7 @@ export default function Perfil() {
     <div className="perfil-container">
       <div className="perfil-izq">
         <img src={avatar} alt="Perfil" className="perfil-avatar" />
-        <h3 className="perfil-nombre">THEPIPE</h3>
+        <h3 className="perfil-nombre">{userName || "Nombre no disponible"}</h3>
         <label className="file-label" htmlFor="avatar-upload">
           Cambiar avatar
         </label>
