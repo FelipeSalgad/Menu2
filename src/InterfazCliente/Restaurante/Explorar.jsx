@@ -15,35 +15,37 @@ export default function Explorar() {
                 // Mostrar datos en caché si existen
                 const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
                 if (cachedData) {
-                    processAndSetData(cachedData.restaurantes, cachedData.categorias);
+                    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
                 }
 
                 // Hacer la petición para actualizar los datos
-                const [restauranteRes, categoriasRes] = await Promise.all([
+                const [restauranteRes, categoriasRes, productoRes] = await Promise.all([
                     fetch("https://menuapi-4u6v.onrender.com/api/restaurante"),
                     fetch("https://menuapi-4u6v.onrender.com/api/categoria"),
+                    fetch("https://menuapi-4u6v.onrender.com/api/producto"),
                 ]);
 
                 const restaurantesData = await restauranteRes.json();
                 const categoriasData = await categoriasRes.json();
+                const comidasData  = await productoRes.json();
 
                 // Guardar nuevos datos en caché
                 localStorage.setItem(
                     "restaurantesCache",
-                    JSON.stringify({ restaurantes: restaurantesData, categorias: categoriasData })
+                    JSON.stringify({ restaurantes: restaurantesData, categorias: categoriasData, productos: comidasData })
                 );
 
                 // Actualizar los datos en el estado
-                processAndSetData(restaurantesData, categoriasData);
+                 processAndSetData(restaurantesData, categoriasData, comidasData);
             } catch (error) {
                 console.error("Error al cargar los datos:", error);
             }
         };
 
         fetchData();
-    }, [comidas]); // Si "comidas" cambia, se recalcula "todo"
+    }, []);
 
-    const processAndSetData = (restaurantesData, categoriasData) => {
+    const processAndSetData = (restaurantesData, categoriasData, comidasData) => {
         // Crear un mapa de id_categoria -> nombre_categoria
         const categoriaMap = categoriasData.reduce((acc, categoria) => {
             acc[categoria.id_categoria] = categoria.nombre;
@@ -59,7 +61,8 @@ export default function Explorar() {
         }));
 
         setRestaurantes(restaurantesWithCategories);
-        setTodo([...restaurantesWithCategories, ...comidas]);
+        setComidas(comidasData);
+        setTodo([...restaurantesWithCategories, ...comidasData ]);
     };
 
     const getActiveData = () => {

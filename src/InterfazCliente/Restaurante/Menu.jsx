@@ -63,13 +63,13 @@ const bebidas = [
     }
 ];
 
-export default function Menu({ isVisible, toggleCart }) {
+export default function Menu({ isVisible, toggleCart, productos}) {
     const [activeTab, setActiveTab] = useState("comidas");
 
     if (!isVisible) return null;
 
-    const items = activeTab === "comidas" ? comidas : bebidas;
-
+    //const items = activeTab === "comidas" ? comidas : bebidas;
+    const items = productos;
     return (
         <div className="modal-menu">
             <div className="menu-contenido">
@@ -93,7 +93,7 @@ export default function Menu({ isVisible, toggleCart }) {
                 </div>
                 <div className="menu-items">
                     {items.map((item) => (
-                        <div key={item.id} className="menu-item">
+                        <div key={item.id_producto} className="menu-item">
                             <img
                                 src={img.macaco}
                                 alt={item.nombre}
@@ -116,4 +116,5 @@ export default function Menu({ isVisible, toggleCart }) {
 Menu.propTypes = {
     isVisible: PropTypes.bool.isRequired,
     toggleCart: PropTypes.func.isRequired,
+    productos: PropTypes.array.isRequired
 };

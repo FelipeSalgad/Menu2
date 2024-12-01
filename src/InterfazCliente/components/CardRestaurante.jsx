@@ -5,32 +5,41 @@ import img from "../json/img";
 
 export default function CardRestaurante({ data }) {
   return (
-    <Link to="/restaurante" className="navegation-register">
-      <div className="restaurant-grid">
-        {data.map((item) => (
-          <div key={item.id_restaurante} className="restaurant-card">
+    <div className="restaurant-grid">
+      {data.map((item) => (
+        <Link
+          to={`/restaurante/${item.id_restaurante}`}
+          className="navegation-register"
+          key={item.id_restaurante + "-" + (item.id_producto || "restaurante")}
+        >
+          <div
+            key={item.id_restaurante + "-" + item.id_producto}
+            className="restaurant-card"
+          >
             <div className="restaurant-image-container">
               <img
                 className="restaurant-image"
-                src={ 
+                src={
                   item.logo
                     ? item.logo
                         .replace(/^url\(['"]?/, "")
                         .replace(/['"]?\)$/, "")
-                    : img.defaultLogo // Hay que poner una imagen por defecto si el restaurante no tiene logo
+                    : item.imagen
+                    ? item.imagen
+                        .replace(/^url\(['"]?/, "")
+                        .replace(/['"]?\)$/, "")
+                    : img.defaultLogo
                 }
-                alt={item.nombre_restaurante}
+                alt={item.nombre}
               />
-              {/* el icono de la etiqueta deberia cambiar dependiendo de si es restaurante o plato, pero no se como hacer eso */}
               {item.tag && (
                 <span className="restaurant-tag">
-                  {" "}
                   <i className="fa-solid fa-utensils"></i> {item.tag}
                 </span>
               )}
             </div>
             <div className="restaurant-info">
-              <h2 className="restaurant-title">{item.nombre_restaurante}</h2>
+              <h2 className="restaurant-title">{item.nombre}</h2>
               {item.descripcion && (
                 <p className="restaurant-description">{item.descripcion}</p>
               )}
@@ -45,27 +54,27 @@ export default function CardRestaurante({ data }) {
                   <i className="fa-solid fa-star"></i> {item.calificacion}
                 </p>
               )}
-              {/*<p className="restaurant-price">{item.price}</p>*/}
+              <p className="restaurant-price">{item.precio}</p>
             </div>
           </div>
-        ))}
-      </div>
-    </Link>
+        </Link>
+      ))}
+    </div>
   );
 }
 
-// Validación de las props con PropTypes
-CardRestaurante.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      id_restaurante: PropTypes.string.isRequired,
-      //logo: PropTypes.string.isRequired,
-      id_categoria: PropTypes.string,
-      nombre_restaurante: PropTypes.string.isRequired,
-      descripcion: PropTypes.string,
-      direccion: PropTypes.string,
-      calificacion: PropTypes.string, //string?
-      //price: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+//// Validación de las props con PropTypes
+//CardRestaurante.propTypes = {
+//  data: PropTypes.arrayOf(
+//    PropTypes.shape({
+//      id_restaurante: PropTypes.string.isRequired,
+//      logo: PropTypes.string,
+//      id_producto: PropTypes.string,
+//      nombre: PropTypes.string.isRequired,
+//      descripcion: PropTypes.string,
+//      direccion: PropTypes.string,
+//      calificacion: PropTypes.string,
+//      precio: PropTypes.string,
+//    })
+//  ).isRequired,
+//};
