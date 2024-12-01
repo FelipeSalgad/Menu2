@@ -21,7 +21,7 @@ export default function Home() {
                     <p className='content-p'>
                         ¡Únete a <img src= {img.logoBlanco} className="logo_home_r" /> y muestra tus platillos!
                     </p>
-                    <Link className="btnn unirse" to='/#'>Unirme</Link>
+                    <Link className="btnn unirse" to='/socio'>Unirme</Link>
                 </div>
             </div>
         </div>

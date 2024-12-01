@@ -157,27 +157,12 @@ export default function InfoPerfil({setUserName}) {
             <label>Fecha de nacimiento</label>
             <Field type="date" name="fechaNacimiento" className="form-field" />
           </div>
-          <div className="form-group">
-            <label>Género</label>
-            <div className="gen-group">
-              <label>
-                <Field type="radio" name="genero" value="hombre" /> Hombre
-              </label>
-              <label>
-                <Field type="radio" name="genero" value="mujer" /> Mujer
-              </label>
-            </div>
-          </div>
-
           <div className="form-actions">
             <button type="submit" className="btn actualizar">
               Actualizar datos
             </button>
             <button type="button" className="btn cerrar" onClick={handleLogout}>
               Cerrar sesión
-            </button>
-            <button type="button" className="btn eliminar">
-              Eliminar mi cuenta
             </button>
           </div>
         </Form>

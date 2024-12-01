@@ -10,6 +10,10 @@ import NavBar from "./InterfazCliente/components/NavBar";
 import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
+import LoginRestaurante from "./InterfazRestaurante/Pages/LoginRestaurante"
+import RegisterRestaurante from "./InterfazRestaurante/Pages/ResgisterRestaurante";
+import HomeRestaurante from "./InterfazRestaurante/Pages/HomeRestaurante";
+
 import { AuthProvider } from "./InterfazCliente/context/authContext";
 import { ClienteProvider } from "./InterfazCliente/context/ClienteContext";
 
@@ -27,6 +31,9 @@ function App() {
           <Route path="/restaurante/:id" element={<Restaurante />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/socio" element={<LoginRestaurante />} />
+          <Route path="/socioRegis" element={<RegisterRestaurante />} />
+          <Route path="/HomeSocio" element={<HomeRestaurante />} />
         </Routes>
         <Footer />
       </ClienteProvider>

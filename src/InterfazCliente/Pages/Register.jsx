@@ -31,7 +31,7 @@ export default function Register() {
     
         try {
             // Realizar la petición POST a /createCliente
-            const response = await axios.post("http://localhost:3000/api/createCliente", values);
+            const response = await axios.post("https://menuapi-4u6v.onrender.com/api/createCliente", values);
     
             // Si la respuesta es 200, el registro fue exitoso
             if (response.status === 200) {
