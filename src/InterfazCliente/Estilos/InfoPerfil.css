@@ -86,6 +86,10 @@
     color: #fff;
 }
 
+.actualizar{
+    margin-left: 85px;
+}
+
 .btn:hover {
     background-color: rgba(225, 151, 40, 0.896);
 }

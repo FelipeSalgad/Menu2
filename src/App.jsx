@@ -10,6 +10,10 @@ import NavBar from "./InterfazCliente/components/NavBar";
 import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
+import LoginRestaurante from "./InterfazRestaurante/Pages/LoginRestaurante"
+import RegisterRestaurante from "./InterfazRestaurante/Pages/ResgisterRestaurante";
+import HomeRestaurante from "./InterfazRestaurante/Pages/HomeRestaurante";
+
 import { AuthProvider } from "./InterfazCliente/context/authContext";
 import { ClienteProvider } from "./InterfazCliente/context/ClienteContext";
 import { CarritoProvider } from "./InterfazCliente/context/CarritoContext";
