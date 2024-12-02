@@ -176,6 +176,7 @@ export default function Restaurante() {
         isVisible={isCartVisible}
         toggleCart={toggleCart}
         productos={productos || []}
+        restauranteInfo = {restauranteInfo}
       />
     </div>
   );

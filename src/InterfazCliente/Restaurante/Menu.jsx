@@ -1,8 +1,10 @@
 import "../Estilos/Menu.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import img from "../json/img.js"
+import img from "../json/img.js";
+import { useCarrito } from "../context/CarritoContext.jsx";
 
+/*
 const comidas = [
     {
         id: 1,
@@ -35,7 +37,8 @@ const comidas = [
         precio: 20000,
     }
 ];
-
+*/
+/*
 const bebidas = [
     {
         id: 6,
@@ -62,59 +65,70 @@ const bebidas = [
         precio: 15000,
     }
 ];
+*/
+export default function Menu({ isVisible, toggleCart, productos, restauranteInfo }) {
+  const [activeTab, setActiveTab] = useState("comidas");
+  const {agregarAlCarrito} = useCarrito();
 
-export default function Menu({ isVisible, toggleCart, productos}) {
-    const [activeTab, setActiveTab] = useState("comidas");
+  const handleAddToCart = (producto, restauranteInfo) => {
+    console.log("restaurante info:", restauranteInfo);
+    agregarAlCarrito(producto, restauranteInfo);
+  };
 
-    if (!isVisible) return null;
+  if (!isVisible) return null;
 
-    //const items = activeTab === "comidas" ? comidas : bebidas;
-    const items = productos;
-    return (
-        <div className="modal-menu">
-            <div className="menu-contenido">
-                <button className="cerrar-menu" onClick={toggleCart}>
-                    X
-                </button>
-                <h2>Menú</h2>
-                <div className="menu-tabs">
-                    <button
-                        className={`tab ${activeTab === "comidas" ? "tab-activo" : ""}`}
-                        onClick={() => setActiveTab("comidas")}
-                    >
-                        Comidas
-                    </button>
-                    <button
-                        className={`tab ${activeTab === "bebidas" ? "tab-activo" : ""}`}
-                        onClick={() => setActiveTab("bebidas")}
-                    >
-                        Bebidas
-                    </button>
-                </div>
-                <div className="menu-items">
-                    {items.map((item) => (
-                        <div key={item.id_producto} className="menu-item">
-                            <img
-                                src={img.macaco}
-                                alt={item.nombre}
-                                className="menu-item-imagen"
-                            />
-                            <h3>{item.nombre}</h3>
-                            <p>{item.descripcion}</p>
-                            <span className="menu-item-precio">
-                                ${item.precio.toLocaleString()}
-                            </span>
-                            <button className="btn-agregar">Añadir al carritoo</button>
-                        </div>
-                    ))}
-                </div>
-            </div>
+  //const items = activeTab === "comidas" ? comidas : bebidas;
+  const items = productos;
+  return (
+    <div className="modal-menu">
+      <div className="menu-contenido">
+        <button className="cerrar-menu" onClick={toggleCart}>
+          X
+        </button>
+        <h2>Menú</h2>
+        <div className="menu-tabs">
+          <button
+            className={`tab ${activeTab === "comidas" ? "tab-activo" : ""}`}
+            onClick={() => setActiveTab("comidas")}
+          >
+            Comidas
+          </button>
+          <button
+            className={`tab ${activeTab === "bebidas" ? "tab-activo" : ""}`}
+            onClick={() => setActiveTab("bebidas")}
+          >
+            Bebidas
+          </button>
         </div>
-    );
+        <div className="menu-items">
+          {items.map((item) => (
+            <div key={item.id_producto} className="menu-item">
+              <img
+                src={img.macaco}
+                alt={item.nombre}
+                className="menu-item-imagen"
+              />
+              <h3>{item.nombre}</h3>
+              <p>{item.descripcion}</p>
+              <span className="menu-item-precio">
+                ${item.precio.toLocaleString()}
+              </span>
+              <button
+                className="btn-agregar"
+                onClick={() => handleAddToCart(item, restauranteInfo)}
+              >
+                Añadir al carrito
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 Menu.propTypes = {
-    isVisible: PropTypes.bool.isRequired,
-    toggleCart: PropTypes.func.isRequired,
-    productos: PropTypes.array.isRequired
+  isVisible: PropTypes.bool.isRequired,
+  toggleCart: PropTypes.func.isRequired,
+  productos: PropTypes.array.isRequired,
 };

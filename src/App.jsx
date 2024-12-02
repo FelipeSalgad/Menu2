@@ -12,23 +12,26 @@ import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
 import { AuthProvider } from "./InterfazCliente/context/authContext";
 import { ClienteProvider } from "./InterfazCliente/context/ClienteContext";
+import { CarritoProvider } from "./InterfazCliente/context/CarritoContext";
 
 function App() {
   return (
     <AuthProvider>
       <ClienteProvider>
-        <NavBar />
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/explorar" element={<Explorar />} />
-          <Route path="/restaurante/:id" element={<Restaurante />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="/favoritos" element={<Favoritos />} />
-        </Routes>
-        <Footer />
+        <CarritoProvider>
+          <NavBar />
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/explorar" element={<Explorar />} />
+            <Route path="/restaurante/:id" element={<Restaurante />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/favoritos" element={<Favoritos />} />
+          </Routes>
+          <Footer />
+        </CarritoProvider>
       </ClienteProvider>
     </AuthProvider>
   );

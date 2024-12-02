@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="footer_social">
                 <Link to="/#" aria-label="Twitter"><i className="fab fa-twitter"></i> </Link>
                 <Link to="/#" aria-label="Facebook"><i className="fab fa-facebook"></i> </Link>
-                <Link to="/#" aria-label="Instagram"><i className="fab fa-instagram"></i> </Link>
+                <Link to="https://www.instagram.com/mauriciomm_1/" aria-label="Instagram"><i className="fab fa-instagram"></i> </Link>
             </div>
             <div className="footer_copyright">
                 © 2024 Menu, Inc. All rights reserved

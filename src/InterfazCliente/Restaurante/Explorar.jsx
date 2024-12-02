@@ -14,7 +14,8 @@ export default function Explorar() {
             try {
                 // Mostrar datos en caché si existen
                 const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
-                if (cachedData) {
+                if (cachedData.restaurantes && cachedData.categorias && !cachedData.productos.message) {
+                    console.log(cachedData.categorias);
                     processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
                 }
 
@@ -28,7 +29,6 @@ export default function Explorar() {
                 const restaurantesData = await restauranteRes.json();
                 const categoriasData = await categoriasRes.json();
                 const comidasData  = await productoRes.json();
-
                 // Guardar nuevos datos en caché
                 localStorage.setItem(
                     "restaurantesCache",
