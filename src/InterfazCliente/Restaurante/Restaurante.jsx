@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Menu from "./Menu";
 import React from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Restaurante() {
   const { id } = useParams(); // Debes obtener el id del restaurante desde la URL
@@ -12,19 +13,58 @@ export default function Restaurante() {
   const [productos, setProductos] = useState([]);
   const [isFavorited, setIsFavorited] = useState(false);
   const [nuevaOpinion, setNuevaOpinion] = useState("");
-  const [opinionesActuales, setOpinionesActuales] = useState([
-    {
-      usuario: "Lucho",
-      texto: "Lorem Ipsum es simplemente texto de relleno...",
-    },
-    { usuario: "Mauro", texto: "Al contrario del pensamiento popular..." },
-    { usuario: "Negro", texto: "El texto de Lorem Ipsum no es aleatorio..." },
-    {
-      usuario: "Palida",
-      texto: "Tiene raíces clásicas en la literatura latina...",
-    },
-  ]);
+  const [opinionesActuales, setOpinionesActuales] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
+  
+  const fetchOpiniones = async () => {
+    console.log(localStorage);
+    try {
+      const response = await axios.get(
+        `https://menuapi-4u6v.onrender.com/api/resena/restaurante/${id}`
+      );
+      if (response.data.message) {
+      } else {
+        // Mapear opiniones y obtener los nombres de los clientes en paralelo
+        const opiniones = await Promise.all(
+          response.data.map(async (opinionData) => {
+            const { nombreCliente, imagen_perfil } = await fetchCliente(
+              opinionData.id_cliente
+            );
+            return {
+              cliente: nombreCliente,
+              comentario: opinionData.comentario,
+              calificacion: opinionData.calificacion,
+              fecha_publicacion: opinionData.fecha_publicacion,
+              imagen_perfil: imagen_perfil,
+            };
+          })
+        );
+        // Aquí puedes establecer el estado o manejar el resultado
+        setOpinionesActuales(opiniones);
+      }
+    } catch (error) {
+      console.error("Error al cargar las opiniones:", error);
+    }
+  };
+
+  const fetchCliente = async (id_cliente) => {
+    try {
+      const response = await axios.get(
+        `https://menuapi-4u6v.onrender.com/api/getCliente/${id_cliente}`
+      );
+      if (response.data.message) {
+        return "Cliente desconocido"; // Valor por //defecto en caso de error
+      } else {
+        return {
+          nombreCliente: response.data[0].nombre,
+          imagen_perfil: response.data[0].imagen_perfil,
+        };
+      }
+    } catch (error) {
+      console.error("Error al cargar el cliente:", error);
+      return "Cliente desconocido"; // Valor por defecto en caso de error
+    }
+  };
 
   useEffect(() => {
     const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
@@ -36,22 +76,21 @@ export default function Restaurante() {
     const restaurante = cachedData.restaurantes.find(
       (restaurante) => restaurante.id_restaurante === id
     );
-
+    setRestauranteInfo(restaurante);
     const productosFiltrados = cachedData.productos.filter(
       (producto) => producto.id_restaurante === restaurante.id_restaurante
     );
     setProductos(productosFiltrados);
-
     if (!restaurante) {
       return; // Si no se encuentra el restaurante, no hacer nada
     }
 
-    setRestauranteInfo((prevInfo) => {
-      // Evitar sobrescribir el estado si ya está cargado
-      if (prevInfo.id_restaurante === restaurante.id_restaurante)
-        return prevInfo;
-      return restaurante;
-    });
+    //setRestauranteInfo((prevInfo) => {
+    //  // Evitar sobrescribir el estado si ya está cargado
+    //  if (prevInfo.id_restaurante === restaurante.id_restaurante)
+    //    return prevInfo;
+    //  return restaurante;
+    //});
 
     if (restaurante.id_categoria) {
       const categoriaRestaurante = cachedData.categorias.find(
@@ -64,6 +103,7 @@ export default function Restaurante() {
         }));
       }
     }
+    fetchOpiniones();
   }, [id]); // Solo depende de 'id', que cambia cuando cambias de restaurante
 
   if (!restauranteInfo) {
@@ -79,15 +119,44 @@ export default function Restaurante() {
 
   const handleOpinionChange = (e) => setNuevaOpinion(e.target.value);
 
-  const handleOpinionSubmit = (e) => {
+  const handleOpinionSubmit = async (e) => {
     e.preventDefault();
+    const storedCliente = JSON.parse(localStorage.getItem("cliente"));
+
+    // Calcular la fecha directamente
+    const hoy = new Date();
+    const año = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+    const día = String(hoy.getDate()).padStart(2, "0");
+    const fechaActual = `${año}/${mes}/${día}`;
+
     if (nuevaOpinion.trim() !== "") {
       const nuevaOpinionObj = {
-        usuario: "Usuario Anónimo",
-        texto: nuevaOpinion,
+        id_cliente: storedCliente.id,
+        id_restaurante: restauranteInfo.id_restaurante,
+        calificacion: 0,
+        comentario: nuevaOpinion,
+        fecha_publicacion: fechaActual, // Usamos la fecha calculada
       };
-      setOpinionesActuales([...opinionesActuales, nuevaOpinionObj]);
-      setNuevaOpinion("");
+
+      try {
+        const response = await axios.post(
+          `https://menuapi-4u6v.onrender.com/api/resena`,
+          nuevaOpinionObj
+        );
+        if (response.data.message) {
+          return response.data.message;
+        } else {
+          fetchOpiniones(); // Actualizar las opiniones
+          setNuevaOpinion("");
+          return response.data.message;
+        }
+      } catch (error) {
+        console.error("Error al crear la reseña:", error);
+        return "Cliente desconocido"; 
+      }
+    } else {
+      alert("Ponga un comentario, maricón");
     }
   };
 
@@ -150,9 +219,13 @@ export default function Restaurante() {
         <h2>Opiniones</h2>
         {opinionesActuales.map((opinion, index) => (
           <div className="opinion" key={index}>
-            <img src={img.gatoTonto} alt={opinion.usuario} className="avatar" />
+            <img
+              src={opinion.imagen_perfil}
+              alt={opinion.cliente}
+              className="avatar"
+            />
             <p>
-              <strong>{opinion.usuario}</strong>: {opinion.texto}
+              <strong>{opinion.cliente}</strong>: {opinion.comentario}
             </p>
           </div>
         ))}
@@ -176,7 +249,7 @@ export default function Restaurante() {
         isVisible={isCartVisible}
         toggleCart={toggleCart}
         productos={productos || []}
-        restauranteInfo = {restauranteInfo}
+        restauranteInfo={restauranteInfo}
       />
     </div>
   );

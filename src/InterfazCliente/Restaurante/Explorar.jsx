@@ -14,10 +14,9 @@ export default function Explorar() {
             try {
                 // Mostrar datos en caché si existen
                 const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
-                if (cachedData.restaurantes && cachedData.categorias && !cachedData.productos.message) {
-                    console.log(cachedData.categorias);
-                    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
-                }
+                //if (cachedData.restaurantes && cachedData.categorias && !cachedData.productos.message) {
+                //    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
+                //}
 
                 // Hacer la petición para actualizar los datos
                 const [restauranteRes, categoriasRes, productoRes] = await Promise.all([

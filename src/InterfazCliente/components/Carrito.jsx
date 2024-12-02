@@ -108,7 +108,6 @@ export default function Carrito() {
   const { carrito, agregarAlCarrito, eliminarDelCarrito, disminuirCantidad } =
     useCarrito();
 
-  console.log(carrito);
   const toggleCarrito = () => {
     setIsCarritoOpen(!isCarritoOpen);
   };

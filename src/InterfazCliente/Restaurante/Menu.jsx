@@ -71,7 +71,6 @@ export default function Menu({ isVisible, toggleCart, productos, restauranteInfo
   const {agregarAlCarrito} = useCarrito();
 
   const handleAddToCart = (producto, restauranteInfo) => {
-    console.log("restaurante info:", restauranteInfo);
     agregarAlCarrito(producto, restauranteInfo);
   };
 
