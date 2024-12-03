@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../Estilos/Explorar.css";
 import CardRestaurante from "../components/CardRestaurante";
 
 export default function Explorar() {
+    const location = useLocation(); // Para acceder al state pasado en la navegación
     const [restaurantes, setRestaurantes] = useState([]);
     const [comidas, setComidas] = useState([]);
     const [todo, setTodo] = useState([]);
     const [categories, setCategories] = useState({});
     const [activeTab, setActiveTab] = useState("Todo");
+
+    useEffect(() => {
+        if (location.state && location.state.filtro) {
+            setActiveTab(location.state.filtro); // Configura el filtro inicial
+        }
+    }, [location.state]);
 
     useEffect(() => {
         const fetchData = async () => {

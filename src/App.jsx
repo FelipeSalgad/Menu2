@@ -22,19 +22,22 @@ function App() {
   return (
     <AuthProvider>
       <ClienteProvider>
-        <CarritoProvider>
-          <NavBar />
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/explorar" element={<Explorar />} />
-            <Route path="/restaurante/:id" element={<Restaurante />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/favoritos" element={<Favoritos />} />
-          </Routes>
-          <Footer />
+      <CarritoProvider>
+        <NavBar />
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/explorar" element={<Explorar />} />
+          <Route path="/restaurante/:id" element={<Restaurante />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/socio" element={<LoginRestaurante />} />
+          <Route path="/socioRegis" element={<RegisterRestaurante />} />
+          <Route path="/homeSocio" element={<HomeRestaurante />} />
+        </Routes>
+        <Footer />
         </CarritoProvider>
       </ClienteProvider>
     </AuthProvider>

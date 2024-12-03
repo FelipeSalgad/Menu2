@@ -119,7 +119,21 @@
     margin-bottom: 10px;
 }
 
-.btn-agregar {
+@keyframes scaleUp {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .btn-agregar {
     background-color: #ff9500;
     color: white;
     border: none;
@@ -127,14 +141,27 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 10px;
-}
-
-.btn-agregar:hover {
+  }
+  
+  .btn-agregar:hover {
     background-color: #000000;
     color: #f9f9f9;
-}
+  }
+  
+  .btn-agregado {
+    background-color: #4caf50; /* Verde para "Agregado" */
+    color: white;
+    transform: scale(1.05); /* Efecto visual al agregar */
+    cursor: default;
+  }
+  
+  .btn-agregado:hover {
+    background-color: #4caf50; /* Mantén el verde al pasar el mouse */
+  }
+  
+  
 
 @media (max-width: 600px) {
     .menu-contenido {

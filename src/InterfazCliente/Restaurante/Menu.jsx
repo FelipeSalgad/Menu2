@@ -4,80 +4,21 @@ import { useState } from "react";
 import img from "../json/img.js";
 import { useCarrito } from "../context/CarritoContext.jsx";
 
-/*
-const comidas = [
-    {
-        id: 1,
-        nombre: "Penne a la bolognesa",
-        descripcion: "Penne, macaco, cilantro, queso, sí, Cebolla, Zanahoria, Apio",
-        precio: 35000,
-    },
-    {
-        id: 2,
-        nombre: "Tagliatelle marinara",
-        descripcion: "Tagliatelle con salsa marinara y mariscos frescos.",
-        precio: 40000,
-    },
-    {
-        id: 3,
-        nombre: "Risotto de setas",
-        descripcion: "Arroz cremoso con una mezcla de setas frescas.",
-        precio: 37000,
-    },
-    {
-        id: 4,
-        nombre: "Croquetas de queso",
-        descripcion: "Deliciosas croquetas rellenas de queso.",
-        precio: 25000,
-    },
-    {
-        id: 5,
-        nombre: "Pancakes de arándanos",
-        descripcion: "Pancakes esponjosos con arándanos frescos.",
-        precio: 20000,
-    }
-];
-*/
-/*
-const bebidas = [
-    {
-        id: 6,
-        nombre: "Café americano",
-        descripcion: "Café negro recién preparado.",
-        precio: 8000,
-    },
-    {
-        id: 7,
-        nombre: "Té helado",
-        descripcion: "Té refrescante servido con hielo y limón.",
-        precio: 10000,
-    },
-    {
-        id: 8,
-        nombre: "Limonada natural",
-        descripcion: "Limonada fresca con un toque de menta.",
-        precio: 12000,
-    },
-    {
-        id: 9,
-        nombre: "Batido de fresa",
-        descripcion: "Batido cremoso hecho con fresas frescas.",
-        precio: 15000,
-    }
-];
-*/
 export default function Menu({ isVisible, toggleCart, productos, restauranteInfo }) {
   const [activeTab, setActiveTab] = useState("comidas");
-  const {agregarAlCarrito} = useCarrito();
+  const [clickedItemId, setClickedItemId] = useState(null);
+  const { agregarAlCarrito } = useCarrito();
 
   const handleAddToCart = (producto, restauranteInfo) => {
+    setClickedItemId(producto.id_producto);
+    setTimeout(() => setClickedItemId(null), 1000); // Tiempo de mensaje "Agregado"
     agregarAlCarrito(producto, restauranteInfo);
   };
 
   if (!isVisible) return null;
 
-  //const items = activeTab === "comidas" ? comidas : bebidas;
   const items = productos;
+
   return (
     <div className="modal-menu">
       <div className="menu-contenido">
@@ -113,10 +54,12 @@ export default function Menu({ isVisible, toggleCart, productos, restauranteInfo
                 ${item.precio.toLocaleString()}
               </span>
               <button
-                className="btn-agregar"
+                className={`btn-agregar ${
+                  clickedItemId === item.id_producto ? "btn-agregado" : ""
+                }`}
                 onClick={() => handleAddToCart(item, restauranteInfo)}
               >
-                Añadir al carrito
+                {clickedItemId === item.id_producto ? "¡Agregado!" : "Añadir al carrito"}
               </button>
             </div>
           ))}
