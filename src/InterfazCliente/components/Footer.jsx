@@ -5,13 +5,9 @@ export default function Footer() {
     return (
         <footer className="footer">
             <div className="footer_links">
-                <Link to="/#" >About</Link>
-                <Link to="/#" >Read Our Blog</Link>
-                <Link to="/#" >Sign Up to Deliver</Link>
-                <Link to="/#" >Add Your Restaurant</Link>
-                <Link to="/#" >Get Help</Link>
-                <Link to="/#" >See More</Link>
-                <Link to="/#" >See Less</Link>
+                <Link to="/socioRegis" >Registra tu restaurante</Link>
+                <Link to="/#" >Restaurantes</Link>
+                <Link to="/#" >Comidas</Link>
             </div>
             <div className="footer_social">
                 <Link to="/#" aria-label="Twitter"><i className="fab fa-twitter"></i> </Link>

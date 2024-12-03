@@ -3,106 +3,6 @@ import "../Estilos/Carrito.css";
 import img from "../json/img";
 import { useCarrito } from "../context/CarritoContext";
 
-/*
-const restaurantes = [
-  {
-    id: 1,
-    nombre: "Laputa Detu Tía",
-    productos: [
-      {
-        id: 1,
-        nombre: "Sopa do macaco",
-        precio: 48900,
-        cantidad: 1,
-        imagen: img.macaco,
-      },
-    ],
-  },
-  {
-    id: 2,
-    nombre: "Restaurante Generico",
-    productos: [
-      {
-        id: 2,
-        nombre: "Hamburguesas de Aida",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 3,
-        nombre: "Sushimbo",
-        precio: 34000,
-        cantidad: 1,
-        imagen: img.logo,
-      },
-      {
-        id: 4,
-        nombre: "Hamburguesas de Aida",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 5,
-        nombre: "Sushimbo",
-        precio: 34000,
-        cantidad: 1,
-        imagen: img.logo,
-      },
-    ],
-  },
-  {
-    id: 3,
-    nombre: "deje de ser sapo",
-    productos: [
-      {
-        id: 6,
-        nombre: "Hamburguesas de sapo",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 7,
-        nombre: "sapo asao",
-        precio: 34000,
-        cantidad: 1,
-        imagen: img.logo,
-      },
-      {
-        id: 8,
-        nombre: "Hamburguesas de Aida",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 9,
-        nombre: "Sushimbo",
-        precio: 34000,
-        cantidad: 1,
-        imagen: img.logo,
-      },
-      {
-        id: 10,
-        nombre: "Hamburguesas de Aida",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 11,
-        nombre: "Sushimbo",
-        precio: 34000,
-        cantidad: 1,
-        imagen: img.logo,
-      },
-    ],
-  },
-];
-*/
-
 export default function Carrito() {
   const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const { carrito, agregarAlCarrito, eliminarDelCarrito, disminuirCantidad } =
@@ -165,47 +65,56 @@ export default function Carrito() {
           </button>
         </div>
         <div className="carrito-content">
-          {carrito.map((restaurante) => (
-            <div className="restaurante" key={restaurante.id_restaurante}>
-              <h3>
-                De: <strong>{restaurante.nombre}</strong>
-              </h3>
-              {restaurante.productos.map((producto) => (
-                <div className="producto" key={producto.id_producto}>
-                  <img src={producto.imagen} alt={producto.nombre} />
-                  <div>
-                    <p>{producto.nombre}</p>
-                    <span>${producto.precio.toLocaleString()}</span>
-                  </div>
-                  <div className="cantidad">
-                    <button
-                      onClick={() =>
-                        handleCantidadChange(
-                          restaurante.id_restaurante,
-                          producto.id_producto,
-                          "-"
-                        )
-                      }
-                    >
-                      -
-                    </button>
-                    <span>{producto.cantidad}</span>
-                    <button
-                      onClick={() =>
-                        handleCantidadChange(
-                          restaurante.id_restaurante,
-                          producto.id_producto,
-                          "+"
-                        )
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
+          {carrito.length === 0 || carrito.every(rest => rest.productos.length === 0) ? (
+            <div className="carrito-vacio">
+              <img src={img.runRun} alt="" />
+              <p>Tu carrito está vacio</p>
+              <h2>Llénalo de</h2>
+              <h1>SABOR</h1>
             </div>
-          ))}
+          ) : (
+            carrito.map((restaurante) => (
+              <div className="restaurante" key={restaurante.id_restaurante}>
+                <h3>
+                  De: <strong>{restaurante.nombre}</strong>
+                </h3>
+                {restaurante.productos.map((producto) => (
+                  <div className="producto" key={producto.id_producto}>
+                    <img src={producto.imagen} alt={producto.nombre} />
+                    <div>
+                      <p>{producto.nombre}</p>
+                      <span>${producto.precio.toLocaleString()}</span>
+                    </div>
+                    <div className="cantidad">
+                      <button
+                        onClick={() =>
+                          handleCantidadChange(
+                            restaurante.id_restaurante,
+                            producto.id_producto,
+                            "-"
+                          )
+                        }
+                      >
+                        -
+                      </button>
+                      <span>{producto.cantidad}</span>
+                      <button
+                        onClick={() =>
+                          handleCantidadChange(
+                            restaurante.id_restaurante,
+                            producto.id_producto,
+                            "+"
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          )}
         </div>
         <div className="carrito-footer">
           <p>

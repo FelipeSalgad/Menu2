@@ -15,6 +15,7 @@ import carrito from './img/carrito.png'
 import gatoTonto from './img/gatoTonto.png'
 import menu from './img/menu.png'
 import defaultLogo from './img/defaultlogo.png'
+import runRun from './img/runRun.png'
 
 export default {
     "logo": logo,
@@ -33,5 +34,6 @@ export default {
     "carrito": carrito,
     "gatoTonto": gatoTonto,
     "menu": menu,
+    "runRun": runRun,
     "defaultLogo": defaultLogo
 }
