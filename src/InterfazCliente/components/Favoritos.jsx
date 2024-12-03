@@ -1,21 +1,34 @@
-export default function Favoritos() {
-    const favoritos = [
-        { id: 1, nombre: "Producto A", categoria: "Categoría 1" },
-        { id: 2, nombre: "Producto B", categoria: "Categoría 2" },
-        { id: 3, nombre: "Producto C", categoria: "Categoría 3" },
-    ];
+import "../Estilos/Favoritos.css";
+import img from "../json/img";
 
-    return (
-        <div>
-            <h2>Favoritos</h2>
-            <ul>
-                {favoritos.map((favorito) => (
-                    <li key={favorito.id}>
-                        <strong>Nombre:</strong> {favorito.nombre} <br />
-                        <strong>Categoría:</strong> {favorito.categoria}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+const restaurantes = [
+  {
+    id_restaurante: "1",
+    logo: img.Aida,
+    tag: "Mexicano",
+    nombre: "El Taco Loco",
+    descripcion: "Deliciosos tacos al pastor",
+    direccion: "Calle Principal 123",
+    calificacion: "4.5",
+    precio: "$$",
+  },
+  {
+    id_restaurante: "2",
+    logo: img.Aida,
+    tag: "Italiano",
+    nombre: "Pizza Bella",
+    descripcion: "Auténtica pizza napolitana",
+    direccion: "Avenida Italia 456",
+    calificacion: "4.8",
+    precio: "$$$",
+  },
+];
+
+export default function Favoritos() {
+  return (
+    <div className="ultimas-ordenes">
+      <h1>Porque los buenos lugares merecen ser recordados</h1>
+      <h3>El proximo semestre el negro hace esto</h3>
+    </div>
+  );
 }
