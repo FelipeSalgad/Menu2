@@ -22,11 +22,11 @@ export default function Explorar() {
         const fetchData = async () => {
             try {
                 // Mostrar datos en caché si existen
-                const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
-                if (cachedData.restaurantes && cachedData.categorias && cachedData.productos) {
-                    //console.log("LocalStorage");
-                    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
-                }
+                //const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
+                //if (cachedData.restaurantes && cachedData.categorias && cachedData.productos) {
+                //    //console.log("LocalStorage");
+                //    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
+                //}
 
                 // Hacer la petición para actualizar los datos
                 const [restauranteRes, categoriasRes, productoRes] = await Promise.all([

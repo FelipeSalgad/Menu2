@@ -122,10 +122,10 @@ export default function UltimasOrdenes() {
             });
 
             // Calcular el subtotal del pedido
-            const subtotal = productosDetallados.reduce(
-              (acc, producto) => acc + producto.precio * producto.cantidad,
-              0
-            );
+            //const subtotal = productosDetallados.reduce(
+            //  (acc, producto) => acc + producto.precio * producto.cantidad,
+            //  0
+            //);
 
             const restauranteInfo = restaurantesLocalStorage.find(
               (r) => r.id_restaurante === pedido.id_restaurante
@@ -134,6 +134,7 @@ export default function UltimasOrdenes() {
             // Formatear la orden completa
             return {
               restaurante: restauranteInfo?.nombre || "Restaurante desconocido",
+              imagen_restaurante: restauranteInfo?.logo,
               hora: pedido.fecha_hora,
               estado: pedido.estado,
               productos: productosDetallados,
@@ -156,11 +157,11 @@ export default function UltimasOrdenes() {
       <h3>¿Te gustó? Pídelo otra vez</h3>
       <br />
       {ordenes.map((orden) => (
-        <div key={orden.id} className="orden-card">
+        <div key={orden.id_pedido} className="orden-card">
           <div className="orden-header">
             <img
               className="orden-restaurante-logo"
-              src={img.defaultLogo}
+              src={orden.imagen_restaurante}
               alt="Logo del restaurante"
             />
             <div className="nombre-hora">
@@ -181,7 +182,7 @@ export default function UltimasOrdenes() {
           </div>
           <div className="orden-productos">
             {orden.productos.map((producto) => (
-              <div key={producto.id} className="orden-producto">
+              <div key={producto.id_producto} className="orden-producto">
                 <img
                   className="producto-imagen"
                   src={producto.imagen}
