@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../Estilos/Carrito.css";
 import img from "../json/img";
 import { useCarrito } from "../context/CarritoContext";
+import { ClienteContext } from "../context/ClienteContext";
 
 export default function Carrito() {
+  const { cliente } = useContext(ClienteContext); // Acceder al contexto
   const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const { carrito, agregarAlCarrito, eliminarDelCarrito, disminuirCantidad } =
     useCarrito();
@@ -39,6 +41,66 @@ export default function Carrito() {
     }
   };
 
+  const hacerCompra = async () => {
+    // Agrupar productos por restaurante
+    const pedidosPorRestaurante = carrito.map((restaurante) => {
+      return {
+        id_restaurante: restaurante.id_restaurante,
+        nombre_restaurante: restaurante.nombre,
+        productos: restaurante.productos.map((producto) => ({
+          id_producto: producto.id_producto,
+          cantidad: producto.cantidad,
+          observaciones: producto.observaciones || null,
+        })),
+        monto_total: restaurante.productos.reduce(
+          (total, producto) => total + producto.precio * producto.cantidad,
+          0
+        ),
+      };
+    });
+    //console.log(pedidosPorRestaurante);
+    // Realizar una petición POST para cada restaurante
+    for (const pedido of pedidosPorRestaurante) {
+      try {
+        const response = await fetch("http://localhost:3000/api/pedido", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_cliente: cliente.id,
+            id_restaurante: pedido.id_restaurante,
+            monto_total: pedido.monto_total,
+            estado: "pendiente",
+            metodo_pago: "efectivo", //Esto cambia cuando se implemente la pasarela de pago
+            productos: pedido.productos,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Error al registrar pedido para el restaurante ${pedido.nombre_restaurante}: ${response.statusText}`
+          );
+        }
+
+        const data = await response.json();
+        console.log(
+          `Pedido registrado para ${pedido.nombre_restaurante}:`,
+          data
+        );
+      } catch (error) {
+        console.error("Error al realizar la compra:", error.message);
+        alert(
+          `Hubo un error al procesar el pedido para el restaurante ${pedido.nombre_restaurante}. Inténtalo de nuevo.`
+        );
+      }
+    }
+
+    // Mostrar un mensaje de éxito y vaciar el carrito
+    alert("Todos los pedidos se han procesado correctamente.");
+    toggleCarrito();
+  };
+
   const totalProductos = carrito
     .flatMap((restaurante) => restaurante.productos)
     .reduce(
@@ -65,7 +127,8 @@ export default function Carrito() {
           </button>
         </div>
         <div className="carrito-content">
-          {carrito.length === 0 || carrito.every(rest => rest.productos.length === 0) ? (
+          {carrito.length === 0 ||
+          carrito.every((rest) => rest.productos.length === 0) ? (
             <div className="carrito-vacio">
               <img src={img.runRun} alt="" />
               <p>Tu carrito está vacio</p>
@@ -130,7 +193,9 @@ export default function Carrito() {
             <button className="seguir-comprando" onClick={toggleCarrito}>
               Seguir comprando
             </button>
-            <button className="confirmar">Confirmar pedido</button>
+            <button className="confirmar" onClick={hacerCompra}>
+              Confirmar pedido
+            </button>
           </div>
         </div>
       </div>

@@ -18,13 +18,15 @@ export default function Explorar() {
     }, [location.state]);
 
     useEffect(() => {
+        //console.log(JSON.parse(localStorage.getItem("restaurantesCache")));
         const fetchData = async () => {
             try {
                 // Mostrar datos en caché si existen
                 const cachedData = JSON.parse(localStorage.getItem("restaurantesCache"));
-                //if (cachedData.restaurantes && cachedData.categorias && !cachedData.productos.message) {
-                //    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
-                //}
+                if (cachedData.restaurantes && cachedData.categorias && cachedData.productos) {
+                    //console.log("LocalStorage");
+                    processAndSetData(cachedData.restaurantes, cachedData.categorias, cachedData.productos);
+                }
 
                 // Hacer la petición para actualizar los datos
                 const [restauranteRes, categoriasRes, productoRes] = await Promise.all([

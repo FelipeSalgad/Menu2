@@ -1,78 +1,156 @@
+import { useState, useEffect, useContext } from "react";
+
 import "../Estilos/UltimasOrde.css";
 import img from "../json/img";
+import { ClienteContext } from "../context/ClienteContext";
 
-const ordenes = [
-  {
-    id: 1,
-    restaurante: "Restaurante de Francisco",
-    hora: "8:55 P.M.",
-    estado: "Entregado",
-    productos: [
-      {
-        id: 1,
-        nombre: "Sopa do macaco",
-        precio: 48900,
-        cantidad: 1,
-        imagen: img.Aida,
-      },
-      {
-        id: 2,
-        nombre: "Hamburguesas de Aida",
-        precio: 27000,
-        cantidad: 1,
-        imagen: img.LaPutadetuTia,
-      },
-    ],
-    subtotal: 109900,
-  },
-  {
-    id: 2,
-    restaurante: "Pizzería Don Giovanni",
-    hora: "7:30 P.M.",
-    estado: "Pendiente",
-    productos: [
-      {
-        id: 1,
-        nombre: "Pizza Margarita",
-        precio: 35000,
-        cantidad: 1,
-        imagen: img.Pizza,
-      },
-      {
-        id: 2,
-        nombre: "Calzone de Jamón",
-        precio: 25000,
-        cantidad: 2,
-        imagen: img.Calzone,
-      },
-    ],
-    subtotal: 85000,
-  },
-  {
-    id: 3,
-    restaurante: "Tu puta prra madre",
-    hora: "7:30 P.M.",
-    estado: "Cancelado",
-    productos: [
-      {
-        id: 1,
-        nombre: "Pizza Margarita",
-        precio: 35000,
-        cantidad: 1,
-        imagen: img.Pizza,
-      },
-      {
-        id: 2,
-        nombre: "Calzone de Jamón",
-        precio: 25000,
-        cantidad: 2,
-        imagen: img.Calzone,
-      },
-    ],
-    subtotal: 85000,
-  },
-];
 export default function UltimasOrdenes() {
+  const { cliente } = useContext(ClienteContext); // Acceder al contexto
+  const [ordenes, setOrdenes] = useState([]);
+  /*
+  const ordenes = [
+    {
+      id: 1,
+      restaurante: "Restaurante de Francisco",
+      hora: "8:55 P.M.",
+      estado: "Entregado",
+      productos: [
+        {
+          id: 1,
+          nombre: "Sopa do macaco",
+          precio: 48900,
+          cantidad: 1,
+          imagen: img.Aida,
+        },
+        {
+          id: 2,
+          nombre: "Hamburguesas de Aida",
+          precio: 27000,
+          cantidad: 1,
+          imagen: img.LaPutadetuTia,
+        },
+      ],
+      subtotal: 109900,
+    },
+    {
+      id: 2,
+      restaurante: "Pizzería Don Giovanni",
+      hora: "7:30 P.M.",
+      estado: "Pendiente",
+      productos: [
+        {
+          id: 1,
+          nombre: "Pizza Margarita",
+          precio: 35000,
+          cantidad: 1,
+          imagen: img.Pizza,
+        },
+        {
+          id: 2,
+          nombre: "Calzone de Jamón",
+          precio: 25000,
+          cantidad: 2,
+          imagen: img.Calzone,
+        },
+      ],
+      subtotal: 85000,
+    },
+    {
+      id: 3,
+      restaurante: "Tu puta prra madre",
+      hora: "7:30 P.M.",
+      estado: "Cancelado",
+      productos: [
+        {
+          id: 1,
+          nombre: "Pizza Margarita",
+          precio: 35000,
+          cantidad: 1,
+          imagen: img.Pizza,
+        },
+        {
+          id: 2,
+          nombre: "Calzone de Jamón",
+          precio: 25000,
+          cantidad: 2,
+          imagen: img.Calzone,
+        },
+      ],
+      subtotal: 85000,
+    },
+  ];
+  */
+  useEffect(() => {
+    // Función para cargar las órdenes del usuario
+    const cargarOrdenes = async () => {
+      try {
+        // Obtener las órdenes del usuario
+        const responsePedidos = await fetch(
+          `http://localhost:3000/api/pedido/${cliente.id}`
+        );
+        const pedidos = await responsePedidos.json();
+
+        const restaurantesLocalStorage =
+          JSON.parse(localStorage.getItem("restaurantesCache")).restaurantes ||
+          [];
+
+        // Iterar sobre los pedidos y formatear los datos
+        const productosDePedidos = await Promise.all(
+          pedidos.map(async (pedido) => {
+            const responseProductos = await fetch(
+              `http://localhost:3000/api/pedido-producto/${pedido.id_pedido}`
+            );
+            const productos = await responseProductos.json();
+
+            // Combinar con información de localStorage
+            const productosLocalStorage =
+              JSON.parse(localStorage.getItem("restaurantesCache")).productos ||
+              [];
+
+            // Crear productos detallados con datos de localStorage
+            const productosDetallados = productos.map((producto) => {
+              const productoInfo = productosLocalStorage.find(
+                (p) => p.id_producto === producto.id_producto
+              );
+
+              return {
+                nombre: productoInfo?.nombre || "Producto desconocido",
+                precio: productoInfo?.precio || 0,
+                cantidad: producto.cantidad,
+                imagen: productoInfo?.imagen || "",
+              };
+            });
+
+            // Calcular el subtotal del pedido
+            const subtotal = productosDetallados.reduce(
+              (acc, producto) => acc + producto.precio * producto.cantidad,
+              0
+            );
+
+            const restauranteInfo = restaurantesLocalStorage.find(
+              (r) => r.id_restaurante === pedido.id_restaurante
+            );
+
+            // Formatear la orden completa
+            return {
+              restaurante: restauranteInfo?.nombre || "Restaurante desconocido",
+              hora: pedido.fecha_hora,
+              estado: pedido.estado,
+              productos: productosDetallados,
+              subtotal: pedido.monto_total,
+            };
+          })
+        );
+
+        setOrdenes(productosDePedidos);
+      } catch (error) {
+        console.error("Error al cargar órdenes:", error);
+      }
+    };
+
+    cargarOrdenes();
+  }, []);
+
   return (
     <div className="ultimas-ordenes">
       <h3>¿Te gustó? Pídelo otra vez</h3>
@@ -91,11 +169,11 @@ export default function UltimasOrdenes() {
             </div>
             <span
               className={`orden-estado ${
-                orden.estado.toLowerCase() === 'entregado'
-                  ? 'estado-entregado'
-                  : orden.estado.toLowerCase() === 'pendiente'
-                  ? 'estado-pendiente'
-                  : 'estado-cancelado'
+                orden.estado.toLowerCase() === "entregado"
+                  ? "estado-entregado"
+                  : orden.estado.toLowerCase() === "pendiente"
+                  ? "estado-pendiente"
+                  : "estado-cancelado"
               }`}
             >
               {orden.estado}

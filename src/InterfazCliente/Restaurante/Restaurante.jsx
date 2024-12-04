@@ -17,7 +17,7 @@ export default function Restaurante() {
   const [isCartVisible, setIsCartVisible] = useState(false);
   
   const fetchOpiniones = async () => {
-    console.log(localStorage);
+
     try {
       const response = await axios.get(
         `https://menuapi-4u6v.onrender.com/api/resena/restaurante/${id}`

@@ -10,7 +10,7 @@ import NavBar from "./InterfazCliente/components/NavBar";
 import Restaurante from "./InterfazCliente/Restaurante/Restaurante";
 import Perfil from "./InterfazCliente/Restaurante/Perfil";
 import Favoritos from "./InterfazCliente/components/Favoritos";
-import LoginRestaurante from "./InterfazRestaurante/Pages/LoginRestaurante"
+import LoginRestaurante from "./InterfazRestaurante/Pages/LoginRestaurante";
 import RegisterRestaurante from "./InterfazRestaurante/Pages/ResgisterRestaurante";
 import HomeRestaurante from "./InterfazRestaurante/Pages/HomeRestaurante";
 
@@ -22,22 +22,22 @@ function App() {
   return (
     <AuthProvider>
       <ClienteProvider>
-      <CarritoProvider>
-        <NavBar />
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/explorar" element={<Explorar />} />
-          <Route path="/restaurante/:id" element={<Restaurante />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="/favoritos" element={<Favoritos />} />
-          <Route path="/socio" element={<LoginRestaurante />} />
-          <Route path="/socioRegis" element={<RegisterRestaurante />} />
-          <Route path="/homeSocio" element={<HomeRestaurante />} />
-        </Routes>
-        <Footer />
+        <CarritoProvider>
+          <NavBar />
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/explorar" element={<Explorar />} />
+            <Route path="/restaurante/:id" element={<Restaurante />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/favoritos" element={<Favoritos />} />
+            <Route path="/socio" element={<LoginRestaurante />} />
+            <Route path="/socioRegis" element={<RegisterRestaurante />} />
+            <Route path="/homeSocio" element={<HomeRestaurante />} />
+          </Routes>
+          <Footer />
         </CarritoProvider>
       </ClienteProvider>
     </AuthProvider>
