@@ -15,9 +15,75 @@ export default function Restaurante() {
   const [nuevaOpinion, setNuevaOpinion] = useState("");
   const [opinionesActuales, setOpinionesActuales] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  
-  const fetchOpiniones = async () => {
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const opinionesGuardadas = JSON.parse(
+          localStorage.getItem("opiniones")
+        );
+        const clientesGuardados = JSON.parse(localStorage.getItem("clientes"));
+  
+        // Filtrar las opiniones para el restaurante específico
+        const opinionesFiltradas = opinionesGuardadas.filter(
+          (opinionData) => opinionData.id_restaurante === id // Asegurar que la opinión es para este restaurante
+        );
+  
+        // Mapear las opiniones con la información de los clientes
+        const opiniones = opinionesFiltradas.map((opinionData) => {
+          const cliente = clientesGuardados.find(
+            (cliente) => cliente.id_cliente === opinionData.id_cliente
+          );
+  
+          // Retornar la estructura deseada
+          return {
+            cliente: cliente ? cliente.nombre : "Cliente desconocido",
+            comentario: opinionData.comentario,
+            calificacion: opinionData.calificacion,
+            fecha_publicacion: opinionData.fecha_publicacion,
+            imagen_perfil: cliente ? cliente.imagen_perfil : null,
+          };
+        });
+  
+        setOpinionesActuales(opiniones);
+      } catch (error) {
+        console.error("Error al cargar las opiniones:", error);
+      }
+    }
+    fetchData();
+  }, [id]);
+  
+  /*
+  useEffect(() => { //consultar cada cliente
+    async function fetchData() {
+      try {
+        const opinionesGuardadas = JSON.parse(
+          localStorage.getItem("opiniones")
+        );
+
+        const clientePromises = opinionesGuardadas.map((opinionData) =>
+          fetchCliente(opinionData.id_cliente)
+        );
+        const clientes = await Promise.all(clientePromises);
+
+        const opiniones = opinionesGuardadas.map((opinionData, index) => ({
+          cliente: clientes[index].nombreCliente,
+          comentario: opinionData.comentario,
+          calificacion: opinionData.calificacion,
+          fecha_publicacion: opinionData.fecha_publicacion,
+          imagen_perfil: clientes[index].imagen_perfil,
+        }));
+
+        setOpinionesActuales(opiniones);
+      } catch (error) {
+        console.error("Error al cargar las opiniones:", error);
+      }
+    }
+    fetchData();
+  }, []);
+  */
+  /*
+  const fetchOpiniones = async () => {
     try {
       const response = await axios.get(
         `https://menuapi-4u6v.onrender.com/api/resena/restaurante/${id}`
@@ -25,7 +91,7 @@ export default function Restaurante() {
       if (response.data.message) {
       } else {
         // Mapear opiniones y obtener los nombres de los clientes en paralelo
-        const opiniones = await Promise.all(
+        opiniones = await Promise.all(
           response.data.map(async (opinionData) => {
             const { nombreCliente, imagen_perfil } = await fetchCliente(
               opinionData.id_cliente
@@ -46,7 +112,7 @@ export default function Restaurante() {
       console.error("Error al cargar las opiniones:", error);
     }
   };
-
+  */
   const fetchCliente = async (id_cliente) => {
     try {
       const response = await axios.get(
@@ -103,7 +169,7 @@ export default function Restaurante() {
         }));
       }
     }
-    fetchOpiniones();
+    //fetchOpiniones();
   }, [id]); // Solo depende de 'id', que cambia cuando cambias de restaurante
 
   if (!restauranteInfo) {
@@ -153,7 +219,7 @@ export default function Restaurante() {
         }
       } catch (error) {
         console.error("Error al crear la reseña:", error);
-        return "Cliente desconocido"; 
+        return "Cliente desconocido";
       }
     } else {
       alert("Ponga un comentario, maricón");

@@ -62,7 +62,7 @@ export default function Carrito() {
     // Realizar una petición POST para cada restaurante
     for (const pedido of pedidosPorRestaurante) {
       try {
-        const response = await fetch("http://localhost:3000/api/pedido", {
+        const response = await fetch("https://menuapi-4u6v.onrender.com/api/pedido", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

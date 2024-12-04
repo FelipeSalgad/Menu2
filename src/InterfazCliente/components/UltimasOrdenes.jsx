@@ -86,7 +86,7 @@ export default function UltimasOrdenes() {
       try {
         // Obtener las órdenes del usuario
         const responsePedidos = await fetch(
-          `http://localhost:3000/api/pedido/${cliente.id}`
+          `https://menuapi-4u6v.onrender.com/api/pedido/${cliente.id}`
         );
         const pedidos = await responsePedidos.json();
 
@@ -98,7 +98,7 @@ export default function UltimasOrdenes() {
         const productosDePedidos = await Promise.all(
           pedidos.map(async (pedido) => {
             const responseProductos = await fetch(
-              `http://localhost:3000/api/pedido-producto/${pedido.id_pedido}`
+              `https://menuapi-4u6v.onrender.com/api/pedido-producto/${pedido.id_pedido}`
             );
             const productos = await responseProductos.json();
 
