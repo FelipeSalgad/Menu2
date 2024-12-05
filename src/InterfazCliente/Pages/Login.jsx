@@ -27,6 +27,7 @@ export default function Login() {
       if (response.status === 200) {
         login(response.data.token);
         navigate("/explorar"); // Redirige al usuario
+        console.log("Informacion usuario loggeado", response.data.cliente)
         setCliente(response.data.cliente);
       }
     } catch (error) {
