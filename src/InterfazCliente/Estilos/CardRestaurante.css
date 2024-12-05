@@ -14,13 +14,18 @@
 .restaurant-card {
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Asegura que el contenido esté bien distribuido */
+    align-items: stretch;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     background-color: #fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    height: 100%; /* Estira las tarjetas al máximo permitido */
+    min-height: 300px; /* Altura mínima para mantener consistencia */
 }
+
 
 .restaurant-card:hover {
     transform: translateY(-3px);
