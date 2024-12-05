@@ -1,154 +1,122 @@
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Arial", sans-serif;
-  background-color: #f7f7f7;
-  min-height: 100vh;
+
+
+/* Contenedor principal del formulario */
+.home-restaurante-container {
+  width: 80%;
+  margin: 0 auto;
   padding: 20px;
-}
-
-.home-container h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.home-container h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #ddd;
-}
-
-.tabs button {
-  background-color: transparent;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.3s, border-bottom 0.3s;
-  border-bottom: 3px solid transparent;
-}
-
-.tabs button:hover {
-  color: #ff9800;
-}
-
-.tabs .active-tab {
-  color: #ff9800;
-  border-bottom: 3px solid #000000;
-}
-
-.form-container {
-  width: 100%;
-  max-width: 600px;
   background-color: #ffffff;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  animation: fadeIn 0.5s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.form label {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 8px;
+.time-range {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.time-range input {
+  width: auto;
+}
+
+
+/* Títulos dentro del contenedor del restaurante */
+.home-restaurante-container h1 {
+  text-align: center;
   color: #333;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
-.form input,
-.form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #c2c2c2;
-  border-radius: 5px;
+.form-column h2 {
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.form-column h3 {
+  color: #777;
   font-size: 1rem;
-  background-color: #f9f9f9;
-  transition: border 0.3s;
+  margin-bottom: 20px;
 }
 
-.form input:focus,
-.form textarea:focus {
-  border: 1px solid #ff9800;
-  outline: none;
+/* Estilo para las columnas del formulario */
+.form-columns {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-textarea {
-  resize: vertical;
+/* Cada columna */
+.form-column {
+  flex: 1;
+  min-width: 45%; /* Ajusta el ancho mínimo */
 }
 
-/* Mensajes de error */
-.error{
-  color: red;
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-top: -15px; /* Opcional: para ajustar el espaciado */
+/* Estilo para los campos de formulario */
+.form-field-socio {
   margin-bottom: 15px;
 }
 
-
-.form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff9800;
-  color: #ffffff;
-  font-size: 1.1rem;
+.form-field-socio label {
   font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-field-socio input,
+.form-field-socio select,
+.form-field-socio textarea {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.form-field-socio input[type="time"] {
+  width: 100%;
+}
+
+.form-field-socio textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-field-socio input:focus,
+.form-field-socio select:focus,
+.form-field-socio textarea:focus {
+  outline: none;
+  border-color: #FF9900;
+  background-color: #e6f0ff;
+}
+
+/* Estilo para los botones */
+.form-footer button {
+  padding: 12px 20px;
+  background-color: #FF9900;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 40px;
 }
 
-.form button:hover {
-  background-color: #e68900;
+.form-footer button:hover {
+  background-color: #f1b965;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.form-footer .submit-button {
+  background-color: #FF9900;
 }
 
-@media (max-width: 768px) {
-  .home-container h1 {
-    font-size: 2rem;
-  }
-
-  .tabs button {
-    font-size: 1rem;
-    padding: 8px 15px;
-  }
-
-  .form-container {
-    padding: 15px;
-  }
-
-  .form input,
-  .form textarea {
-    padding: 8px;
-  }
-
-  .form button {
-    padding: 10px;
-  }
+.form-footer .submit-button:hover {
+  background-color: #f1b965;
 }
