@@ -68,7 +68,7 @@ export default function Carrito() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id_cliente: cliente.id,
+            id_cliente: cliente.id_cliente,
             id_restaurante: pedido.id_restaurante,
             monto_total: pedido.monto_total,
             estado: "pendiente",

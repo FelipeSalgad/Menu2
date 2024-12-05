@@ -198,7 +198,7 @@ export default function Restaurante() {
 
     if (nuevaOpinion.trim() !== "") {
       const nuevaOpinionObj = {
-        id_cliente: storedCliente.id,
+        id_cliente: storedCliente.id_cliente,
         id_restaurante: restauranteInfo.id_restaurante,
         calificacion: 0,
         comentario: nuevaOpinion,
