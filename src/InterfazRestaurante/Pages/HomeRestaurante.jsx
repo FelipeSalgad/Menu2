@@ -1,20 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import "../Estilos/HomeRest.css";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function HomeRestaurante() {
   const [mostrarFormularioProducto, setMostrarFormularioProducto] = useState(false);
   const formikRef = useRef(null); // Referencia al Formik
+  const { id_socio } = useParams();
 
+  const initalRestaurante = {
+    nombreRestaurante: "",
+    direccionRestaurante: "",
+    telefonoRestaurante: ""
+  }
   const initialValues = {
     nombreSocio: "",
     apellidoSocio: "",
     correoElectronico: "",
     telefono: "",
     contrasena: "",
-    nombreRestaurante: "",
-    direccionRestaurante: "",
-    telefonoRestaurante: "",
+   
     horarioLunesInicio: "",
     horarioLunesFin: "",
     horarioMartesInicio: "",
@@ -34,13 +40,62 @@ export default function HomeRestaurante() {
     precio: "",
     imagenUrl: "",
   };
+
+  useEffect(() => {
+    const cargarDatosSocio = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token no encontrado en localStorage');
+        return;
+      }
+  
+      try {
+        const respuestasocio = await axios.get('http://localhost:3000/api/socio/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const datosSocio = respuestasocio.data[0];
+        console.log('Datos del socio:', datosSocio);
+
+       /* const respuestarestaurante = await axios.get('http://localhost:3000/api/getRestaurante/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const datosrestaurante = respuestarestaurante.data[0];
+        console.log('Datos del restaurante:', datosrestaurante);*/
+        // Carga los datos en los campos del formulario
+        if (formikRef.current) {
+          const formik = formikRef.current;
+          formik.setFieldValue('nombreSocio', datosSocio.nombre || '');
+          formik.setFieldValue('apellidoSocio', datosSocio.apellido || '');
+          formik.setFieldValue('correoElectronico', datosSocio.correo || '');
+          formik.setFieldValue('telefono', datosSocio.telefono || '');
+          formik.setFieldValue('contrasena', datosSocio.contrasena || '');
+          // Repite esto para todos los campos necesarios
+        }
+      } catch (error) {
+        console.error('Error al cargar los datos del socio:', error);
+      }
+    };
+  
+    cargarDatosSocio();
+  }, []);
+  
+  
   const handleGuardarRestaurante = (values) => {
-    console.log("Datos del Restaurante:", values);
-    setMostrarFormularioProducto(true); // Muestra el formulario de productos
+    const respuestasocio = axios.post('http://localhost:3000/api/restaurante',values);
+
+    console.log("Datos del Restaurante:", respuestasocio);
+  //  setMostrarFormularioProducto(true); // Muestra el formulario de productos
   };
 
   const handleGuardarProducto = (values) => {
-    console.log("Datos del Producto:", values);
+    const respuestasproducto = axios.post('http://localhost:3000/api/producto',values);
+    console.log("Datos del Producto:", respuestasproducto);
   };
 
   return (
@@ -132,11 +187,11 @@ export default function HomeRestaurante() {
                   <h2>Información del Producto</h2>
                   <div className="form-field-socio">
                     <label>Nombre Producto</label>
-                    <Field name="nombreProducto" type="text" placeholder="Nombre del producto" />
+                    <Field name="nombre" type="text" placeholder="Nombre del producto" />
                   </div>
                   <div className="form-field-socio">
                     <label>Descripción</label>
-                    <Field name="descripcionProducto" as="textarea" placeholder="Descripción del producto" />
+                    <Field name="descripcion" as="textarea" placeholder="Descripción del producto" />
                   </div>
                   <div className="form-field-socio">
                     <label>Precio</label>

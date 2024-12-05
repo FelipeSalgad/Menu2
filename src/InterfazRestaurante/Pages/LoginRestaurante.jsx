@@ -5,19 +5,22 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function LoginRestaurante() {
-  const navigate = useNavigate(); // Hook para navegar
+  const navigate = useNavigate(); // Hook para navegar ledesma23@gmail.com 3107234589
+  
   const initialValues = {
     correo: "",
     contrasena: "",
   };
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (correo,contrasena) => {
     try {
       const response = await axios.post(
-        "https://menuapi-4u6v.onrender.com/api/loginSocio",
-        values
+        "http://localhost:3000/api/loginSocio",
+        correo,contrasena
       );
       if (response.status === 200) {
-        //login(response.data.token);
+        localStorage.setItem('token', response.data.token);
+        const socio = response.data[0];
+        console.log(socio)
         navigate("/homeSocio"); // Redirige al usuario
         //setCliente(response.data.cliente);
       }

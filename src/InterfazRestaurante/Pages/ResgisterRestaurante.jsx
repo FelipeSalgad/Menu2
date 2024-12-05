@@ -37,7 +37,7 @@ export default function RegisterRestaurante() {
     try {
       // Realizar la petición POST a /createCliente
       const response = await axios.post(
-        "https://menuapi-4u6v.onrender.com/api/createSocio",
+        "http://localhost:3000/api/createSocio",
         values
       );
 
